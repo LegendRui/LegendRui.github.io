@@ -3,8 +3,8 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Share
-subtitle: Love what I love.
+title: 分享热爱
+subtitle: 好记性不如烂博客
 description: ''
 keywords:
 author: Mistery
@@ -13,7 +13,7 @@ timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://202.182.105.241
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -101,3 +101,5 @@ deploy:
   type: git
   repo: git@github.com:LegendRui/LegendRui.github.io.git
   branch: master
+
+avater: http://q1.qlogo.cn/g?b=qq&nk=493654134&s=5
