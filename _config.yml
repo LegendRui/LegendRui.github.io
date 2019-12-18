@@ -103,3 +103,9 @@ deploy:
   branch: master
 
 avater: http://q1.qlogo.cn/g?b=qq&nk=493654134&s=5
+
+excerpt:
+depth: 5
+excerpt_excludes: []
+more_excludes: []
+hideWholePostExcerpts: true
