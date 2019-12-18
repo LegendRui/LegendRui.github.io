@@ -21,7 +21,7 @@
   var CONFIG = {
     hostname: new URL('http://202.182.105.241').hostname,
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Pisces',
     version: '7.6.0',
     exturl: false,
     sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
@@ -105,7 +105,7 @@
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
-  <div class="site-meta">
+  <div class="site-meta custom-logo">
 
     <div>
       <a href="/" class="brand" rel="start">
@@ -115,6 +115,9 @@
       </a>
     </div>
         <p class="site-subtitle">好记性不如烂博客</p>
+      <a>
+        <img class="custom-logo-image" src="http://www.acgrenwu.com/uploads/allimg/170821/1-1FR11FRK10.jpg" alt="分享热爱">
+      </a>
   </div>
 
   <div class="site-nav-toggle">
@@ -275,339 +278,14 @@
 </ul>
 </li>
 </ul>
-<h3 id="6-TCP与UDP的区别"><a href="#6-TCP与UDP的区别" class="headerlink" title="6. TCP与UDP的区别"></a>6. TCP与UDP的区别</h3><ul>
-<li>TCP是面向连接的、可靠的，而UDP是非面向连接、不可靠的</li>
-<li>TCP一对一，UDP支持一对一，一对多，多对一，多对多</li>
-<li>TCP具有拥塞控制与流量控制而UDP没有</li>
-<li>TCP报文长度动态改变而UDP不是</li>
-<li>TCP传输单位为报文段，而UDP传输单位为用户数据报</li>
-<li>TCP注重安全性，而UDP数据传输快</li>
-<li>用TCP的协议：FTP、Telnet、SMTP、POP3、HTTP(s)，用UDP的协议：DNS、SNMP、TFTP</li>
-</ul>
-<h3 id="7-HTTP与HTTPS的区别"><a href="#7-HTTP与HTTPS的区别" class="headerlink" title="7. HTTP与HTTPS的区别"></a>7. HTTP与HTTPS的区别</h3><ul>
-<li><p>区别如下：</p>
-<ol>
-<li>HTTP协议传输的数据是以明文方式，而HTTPS协议传输的数据则是经过TLS加密的</li>
-<li>HTTPS在TCP三次握手后，还需要进行SSL的handshake，协商加密密钥</li>
-<li>HTTPS需要在服务器端申请证书，浏览器端安装对应的根证书</li>
-<li>HTTP协议的端口是80，HTTPS协议的端口是443</li>
-</ol>
-</li>
-<li><p>HTTPS优缺点</p>
-<ul>
-<li>优点<ul>
-<li>安全性更高</li>
-<li>可以认证用户和服务器，确保数据发送到正确的用户和服务器</li>
-</ul>
-</li>
-<li>缺点<ul>
-<li>握手阶段延时较高</li>
-<li>部署成本高（购买证书，解密吃CPU）</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="8-浏览器中输入URL后会发生什么"><a href="#8-浏览器中输入URL后会发生什么" class="headerlink" title="8.浏览器中输入URL后会发生什么"></a>8.浏览器中输入URL后会发生什么</h3><ol>
-<li>域名解析获得IP地址：用到DNS、UDP协议</li>
-<li>建立http连接：用到http协议</li>
-<li>生成get请求报文：生成后交给TCP层处理，用到TCP与IP协议</li>
-</ol>
-<h3 id="9-HTTP请求步骤"><a href="#9-HTTP请求步骤" class="headerlink" title="9. HTTP请求步骤"></a>9. HTTP请求步骤</h3><ol>
-<li>客户端连接到web服务器</li>
-<li>发送http客户请求</li>
-<li>服务器接受请求并返回http响应</li>
-<li>释放TCP连接</li>
-<li>客户端浏览器解析html内容</li>
-</ol>
-<h3 id="10-socket编程中服务器端和客户端主要用到哪些函数"><a href="#10-socket编程中服务器端和客户端主要用到哪些函数" class="headerlink" title="10. socket编程中服务器端和客户端主要用到哪些函数"></a>10. socket编程中服务器端和客户端主要用到哪些函数</h3><ul>
-<li><p>基于TCP的socket</p>
-<ul>
-<li>Server<ol>
-<li>创建socket：socket()</li>
-<li>设置socket属性：setsockopt()</li>
-<li>绑定IP、端口号：bind()</li>
-<li>设置允许的最大连接数：listen()</li>
-<li>接收客户端的连接：accept()</li>
-<li>收发数据：send()+recv() or read()+write()</li>
-<li>关闭网络连接：close()</li>
-<li>关闭监听</li>
-</ol>
-</li>
-<li>Client<ol>
-<li>创建socket：socket()</li>
-<li>设置socket属性：setsockopt()</li>
-<li>设置绑定IP、端口号：bind()</li>
-<li>设置要连接的IP及端口</li>
-<li>连接Server：connect()</li>
-<li>收发数据: send()+recv() / read()/write()</li>
-<li>关闭网络：close()<br><img src="..//pics//tcp_socket.png" alt="基于TCP的socket"></li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p>UDP的socket</p>
-<ul>
-<li>Server<ol>
-<li>创建socket：socket()</li>
-<li>设置属性：setsockopt()</li>
-<li>绑定IP、端口：bind()</li>
-<li>循环收、发数据：recvfrom() + sendto()</li>
-<li>关闭连接</li>
-</ol>
-</li>
-<li>Client<ol>
-<li>创建socket：socket()</li>
-<li>设置属性：setsockopt()</li>
-<li>绑定IP、端口：bind()</li>
-<li>设置要连接的IP及端口</li>
-<li>发送、接收数据：sendto() + recvfrom()</li>
-<li>关闭连接<br><img src="..//pics//udp_socket.png" alt="基于UDP的socket"></li>
-</ol>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Post与Get的区别"><a href="#Post与Get的区别" class="headerlink" title="Post与Get的区别"></a>Post与Get的区别</h3><ul>
-<li>表面区别</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th align="center"></th>
-<th align="center">Get</th>
-<th align="center">Post</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">编码类型</td>
-<td align="center">application/x-www-form-urlencoded</td>
-<td align="center">application/x-www-form-urlencoded或multipart/form-data</td>
-</tr>
-<tr>
-<td align="center">数据长度限制</td>
-<td align="center">URL最大长度是2048个字符</td>
-<td align="center">无限制</td>
-</tr>
-<tr>
-<td align="center">数据类型限制</td>
-<td align="center">ASCII字符</td>
-<td align="center">没有限制，可以是二进制数据</td>
-</tr>
-<tr>
-<td align="center">安全性</td>
-<td align="center">较差，因为数据是URL的一部分</td>
-<td align="center">较好，数据不会保存在浏览器历史和服务器日志中</td>
-</tr>
-<tr>
-<td align="center">可见性</td>
-<td align="center">数据在URL中，可见</td>
-<td align="center">数据不在URL中，不可见</td>
-</tr>
-<tr>
-<td align="center">后退/刷新</td>
-<td align="center">无害</td>
-<td align="center">数据会重新提交</td>
-</tr>
-<tr>
-<td align="center">缓存</td>
-<td align="center">可以</td>
-<td align="center">不可以</td>
-</tr>
-<tr>
-<td align="center">书签</td>
-<td align="center">可以</td>
-<td align="center">不可以</td>
-</tr>
-<tr>
-<td align="center">历史</td>
-<td align="center">参数保留在历史记录中</td>
-<td align="center">参数不会保留在历史记录中</td>
-</tr>
-</tbody></table>
-<ul>
-<li>本质区别<ul>
-<li>Get用于获取信息，无副作用，是幂等的，且可缓存，而Post用于修改服务器上的数据，有副作用，非幂等的，不可缓存</li>
-<li>在传输上，都是基于TCP/IP协议的，没有区别；在报文格式上，不带参数时，区别在于请求行的方法不同（分别是Get和Post），带参数时，Get的参数在URL中，而Post的参数在请求体中</li>
-</ul>
-</li>
-</ul>
-<p>参考：<br>[1] <a href="https://www.cnblogs.com/logsharing/p/8448446.html" target="_blank" rel="noopener">https://www.cnblogs.com/logsharing/p/8448446.html</a><br>[2] <a href="https://baijiahao.baidu.com/s?id=1626599028653203490&amp;wfr=spider&amp;for=pc" target="_blank" rel="noopener">https://baijiahao.baidu.com/s?id=1626599028653203490&amp;wfr=spider&amp;for=pc</a></p>
-<h3 id="HTTP请求头部"><a href="#HTTP请求头部" class="headerlink" title="HTTP请求头部"></a>HTTP请求头部</h3><ul>
-<li><p>请求行</p>
-<ul>
-<li>请求方法</li>
-<li>请求URL</li>
-<li>HTTP协议及版本</li>
-</ul>
-</li>
-<li><p>报文头</p>
-</li>
-<li><p>报文体</p>
-<h3 id="指针常量与常量指针"><a href="#指针常量与常量指针" class="headerlink" title="指针常量与常量指针"></a>指针常量与常量指针</h3><p>区别：*在前在是指针常量，const在前则是常量指针</p>
-</li>
-<li><p>指针常量：不能改变指针的指向，int* const p = &a;</p>
-</li>
-<li><p>常量指针：不能改变指针指向的值， const int *p;</p>
-</li>
-</ul>
-<h3 id="C-内存布局（从高到低的顺序）以及为什么这么布局？"><a href="#C-内存布局（从高到低的顺序）以及为什么这么布局？" class="headerlink" title="C++内存布局（从高到低的顺序）以及为什么这么布局？"></a>C++内存布局（从高到低的顺序）以及为什么这么布局？</h3><ul>
-<li>内核空间（1G）</li>
-<li>栈（向下增长）：局部变量</li>
-<li>内存映射段：存放静态库、动态库以及文件映射等</li>
-<li>堆（向上增长）：malloc、calloc、realloc以及new申请的空间</li>
-<li>数据段<ul>
-<li>BSS段：未初始化或初始化为0的全局变量和静态变量</li>
-<li>数据段：已初始化的全局变量和静态变量</li>
-</ul>
-</li>
-<li>代码段<ul>
-<li>可执行代码</li>
-<li>只读常量</li>
-</ul>
-</li>
-</ul>
-<h3 id="Linux-C-调试工具"><a href="#Linux-C-调试工具" class="headerlink" title="Linux C++调试工具"></a>Linux C++调试工具</h3><p><a href="https://www.cnblogs.com/lidabo/p/4377545.html" target="_blank" rel="noopener">https://www.cnblogs.com/lidabo/p/4377545.html</a></p>
-<h3 id="为什么构造函数不可以是虚函数？"><a href="#为什么构造函数不可以是虚函数？" class="headerlink" title="为什么构造函数不可以是虚函数？"></a>为什么构造函数不可以是虚函数？</h3><ul>
-<li>构造函数不需要是虚函数，也不允许是虚函数。因为当创建一个对象时，我们总是要明确指定对象的类型，尽管我们可能通过基类的指针或引用去访问它。</li>
-<li>从实现的角度看。虚函数表总是在构造函数调用之后才建立，因而构造函数不可能成为虚函数。</li>
-</ul>
-<h3 id="红黑树的特点"><a href="#红黑树的特点" class="headerlink" title="红黑树的特点"></a>红黑树的特点</h3><ol>
-<li>每个节点要么是红的，要么是黑的；</li>
-<li>根节点是黑的；</li>
-<li>每个叶节点都是黑的；</li>
-<li>如果一个节点是红的，那么它的两个子节点都是黑的；</li>
-<li>对于任意一个节点而言，其到叶节点尾端NULL指针的每条路径都经过相同数目的黑节点。</li>
-</ol>
-<h3 id="AVL树和红黑树的定义与区别"><a href="#AVL树和红黑树的定义与区别" class="headerlink" title="AVL树和红黑树的定义与区别"></a>AVL树和红黑树的定义与区别</h3><ul>
-<li>AVL树：AVL（平衡二叉树），是一种特殊的排序二叉树，其左右子树也是平衡二叉树，且左右子树高度差的绝对值不大于1。</li>
-<li>红黑树：红黑树是一种二叉查找树，但在每个节点增加了一个存储位表示节点的颜色，非红即黑。通过对任何一条根到叶子的路径上各个节点着色的方式的限制，红黑树确保没有一条路径会比其他路径长2倍。故，红黑树是一种弱平衡二叉树。红黑树有以下5个特点：<ol>
-<li>每个节点要么是红的，要么是黑的；</li>
-<li>根节点是黑的；</li>
-<li>每个叶节点都是黑的；</li>
-<li>如果一个节点是红的，那么它的两个子节点都是黑的；</li>
-<li>对于任意一个节点而言，其到叶节点尾端NULL指针的每条路径都经过相同数目的黑节点。</li>
-</ol>
-</li>
-<li>区别：AVL树是高度平衡的，频繁的插入和删除，会引起频繁的rebalance，导致效率下降；红黑树不是高度平衡的，算是一种折中，插入最多2次旋转，删除最多3次旋转。</li>
-</ul>
-<h3 id="B-树与B-树的定义"><a href="#B-树与B-树的定义" class="headerlink" title="B-树与B+树的定义"></a>B-树与B+树的定义</h3><ul>
-<li>B树：一颗m阶B树定义如下<ul>
-<li>每个节点最多有m-1个关键字</li>
-<li>根节点最少可以只有1个关键字</li>
-<li>非根节点至少有ceil(m/2)+1个关键字</li>
-<li>每个节点的关键字都按从小到大的顺序排列，左子树的关键字都小于它，右子树的关键字都大于它</li>
-<li>所有叶子节点都位于同一层（或者说根节点到每个叶子节点的长度相同）</li>
-</ul>
-</li>
-<li>B+树：一颗m阶B+树的定义如下<ul>
-<li>B+树的定义基本与B树等价，但是B+树还有以下要求</li>
-<li>B+树包含2种类型的节点：内部节点（索引节点）和叶子节点。</li>
-<li>内部节点不保存数据，只用于索引，因而所有的数据都保存在叶子节点上</li>
-<li>内部节点中的key都按从小到大的顺序排列，对于内部节点中的一个key，左子树中所有的key都<em>小于</em>它，右子树中的key都<em>大于等于</em>它</li>
-<li>每个叶子节点都存有下一个相邻叶子节点的指针，叶子节点本身根据关键字从小到大形成链表</li>
-</ul>
-</li>
-</ul>
-<h3 id="堆与栈的区别"><a href="#堆与栈的区别" class="headerlink" title="堆与栈的区别"></a>堆与栈的区别</h3><ul>
-<li>堆是有低地址向高地址扩展，而栈是高地址向低地址扩展</li>
-<li>堆中的内存需要手动的申请与释放，而栈中的地址是由OS自动的申请和释放的</li>
-<li>堆中频繁的调用malloc和free会产生内存碎片，而栈不会</li>
-<li>堆的分配效率低，而栈的分配效率高</li>
-</ul>
-<h3 id="常见排序算法总结"><a href="#常见排序算法总结" class="headerlink" title="常见排序算法总结"></a>常见排序算法总结</h3><table>
-<thead>
-<tr>
-<th>算法</th>
-<th align="center">平均时间复杂度</th>
-<th align="center">最好时间复杂度</th>
-<th align="center">最坏时间复杂度</th>
-<th align="center">空间复杂度</th>
-<th align="right">是否稳定</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>插入排序</td>
-<td align="center">O(n^2)</td>
-<td align="center">O(n)</td>
-<td align="center">O(n^2)</td>
-<td align="center">O(1)</td>
-<td align="right">稳定</td>
-</tr>
-<tr>
-<td>冒泡排序</td>
-<td align="center">O(n^2)</td>
-<td align="center">O(n)</td>
-<td align="center">O(n^2)</td>
-<td align="center">O(1)</td>
-<td align="right">稳定</td>
-</tr>
-<tr>
-<td>简单选择排序</td>
-<td align="center">O(n^2)</td>
-<td align="center">O(n^2)</td>
-<td align="center">O(n^2)</td>
-<td align="center">O(1)</td>
-<td align="right">不稳定</td>
-</tr>
-<tr>
-<td>希尔排序</td>
-<td align="center">O(n^1.25)</td>
-<td align="center">O(n)</td>
-<td align="center">O(n^2)</td>
-<td align="center">O(1)</td>
-<td align="right">不稳定</td>
-</tr>
-<tr>
-<td>归并排序</td>
-<td align="center">O(nlogn)</td>
-<td align="center">O(nlogn)</td>
-<td align="center">O(nlogn)</td>
-<td align="center">O(n)</td>
-<td align="right">稳定</td>
-</tr>
-<tr>
-<td>快速排序</td>
-<td align="center">O(nlogn)</td>
-<td align="center">O(nlogn)</td>
-<td align="center">O(n^2)</td>
-<td align="center">O(nlogn)</td>
-<td align="right">不稳定</td>
-</tr>
-<tr>
-<td>堆排序</td>
-<td align="center">O(nlogn)</td>
-<td align="center">O(nlogn)</td>
-<td align="center">O(nlogn)</td>
-<td align="center">O(1)</td>
-<td align="right">不稳定</td>
-</tr>
-</tbody></table>
-<h3 id="常用设计模式"><a href="#常用设计模式" class="headerlink" title="常用设计模式"></a>常用设计模式</h3><ul>
-<li><p>单例模式：主要解决全局使用的类频繁的创建和销毁的问题。单例模式下可以确保一个类只有一个实例，而且自行化实例并向整个系统提供这个实例。</p>
-<ul>
-<li>多线程安全问题<ul>
-<li>饿汉式：基于class loader机制避免多线程同步问题，但可能</li>
-<li>懒汉式：通过双重锁机制实现线程安全</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>工厂模式：主要解决接口选择的问题。该模式下定义一个创建对象的接口，让其子类自己决定实例化哪一个工厂类，使其创建过程延迟到子类进行</p>
-</li>
-<li><p>观察者模式：定义对象间的一种一对多的依赖关系。当被观察者发生状态改变时，观察者会受到通知。类似于回调函数。</p>
-</li>
-<li><p>装饰器模式：对已经存在的某些类进行装饰，以拓展一些功能，从而动态的为一个对象增加新的功能。</p>
-</li>
-</ul>
-<h3 id="OOP设计模式五大原则"><a href="#OOP设计模式五大原则" class="headerlink" title="OOP设计模式五大原则"></a>OOP设计模式五大原则</h3><ul>
-<li>单一职责：避免相同的职责分配到不同的类中；避免一个类承担太多职责</li>
-<li>接口隔离：客户端不应实现一些它们不会使用的接口</li>
-<li>开放-封闭：在扩展性方面是开放的而在更改性方面是封闭的</li>
-<li>替换：子类型必须能替换掉它们的父类、并且出现在父类出现的任何地方</li>
-<li>依赖倒置：上层模块不应该依赖于下层模块</li>
-</ul>
-<h3 id="手写Singleton模式"><a href="#手写Singleton模式" class="headerlink" title="手写Singleton模式"></a>手写Singleton模式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">template&lt;typename T&gt; </span><br><span class="line">class Singleton &#123;</span><br><span class="line">public:</span><br><span class="line">    Singleton(const Singleton&amp; ) &#x3D; delete;</span><br><span class="line">    Singleton&amp; operator&#x3D;(const Singleton&amp; ) &#x3D; delete;</span><br><span class="line">    static T* getInstance() &#123;</span><br><span class="line">        pthread_mutex_lock(&amp;mutex);</span><br><span class="line">        if (uniqueInstance &#x3D;&#x3D; nullptr) &#123;</span><br><span class="line">            uniqueInstance &#x3D; new T();</span><br><span class="line">        &#125;</span><br><span class="line">        pthread_mutex_unlock(&amp;mutex);</span><br><span class="line">        return uniqueInstance;</span><br><span class="line">    &#125;</span><br><span class="line">private:</span><br><span class="line">    static T* uniqueInstance;</span><br><span class="line">    static pthread_mutex_t mutex;</span><br><span class="line">    Singleton() &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">template&lt;typename T&gt; </span><br><span class="line">pthread_mutex_t Singleton&lt;T&gt;::mutex &#x3D; PTHREAD_MUTEX_INITIALIZER;</span><br><span class="line"></span><br><span class="line">template&lt;typename T&gt; </span><br><span class="line">T* Singleton&lt;T&gt;::uniqueInstance &#x3D; nullptr;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/12/18/C-%E9%9D%A2%E8%AF%95%E9%A2%98/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -702,6 +380,14 @@
 <li>rm：删除文件（-r删除目录）</li>
 </ul>
 
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/12/18/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -789,6 +475,14 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/LegendRui" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;LegendRui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:mistery.zhang@gmail.com" title="E-Mail → mailto:mistery.zhang@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
 
 
 
@@ -818,7 +512,7 @@
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.1.1
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.6.0
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.6.0
   </div>
 
         
@@ -835,6 +529,8 @@
   </div>
 
   
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
@@ -844,7 +540,7 @@
 <script src="/js/motion.js"></script>
 
 
-<script src="/js/schemes/muse.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
 <script src="/js/next-boot.js"></script>
@@ -853,6 +549,15 @@
 
 
   
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
 
 
 
@@ -872,5 +577,8 @@
 
   
 
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
 </body>
 </html>
