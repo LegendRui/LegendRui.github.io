@@ -4,5 +4,5 @@ date: 2019-12-21 18:33:26
 tags:
     - Linux
     - vim
-categories: 技术
+categories: Linux
 ---

@@ -5,7 +5,7 @@
 # Site
 title: 分享热爱
 subtitle: 好记性不如烂博客
-description: ''
+description: Nice to meet you!
 keywords: 
 author: Mistery
 language: zh-CN
@@ -109,3 +109,9 @@ depth: 5
 excerpt_excludes: []
 more_excludes: []
 hideWholePostExcerpts: true
+
+symbols_count_time:
+  symbols: true
+  time: true
+  total_symbols: true
+  total_time: true
