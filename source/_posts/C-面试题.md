@@ -130,7 +130,7 @@ categories: C++
         4. 设置要连接的IP及端口
         5. 发送、接收数据：sendto() + recvfrom()
         6. 关闭连接
-![基于UDP的socket](..//pics//udp_socket.png)
+![基于UDP的socket](/images/udp_socket.png)
 
 ### Post与Get的区别
 + 表面区别

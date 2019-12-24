@@ -1,3 +1,4 @@
+clear
 git checkout code
 hexo clean
 hexo g
