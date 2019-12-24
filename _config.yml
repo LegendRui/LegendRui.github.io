@@ -116,6 +116,14 @@ symbols_count_time:
   total_symbols: true
   total_time: true
 
-
+# enable google search
 sitemap:
   path: sitemap.xml
+
+# enable math equation support
+math:
+  engine: 'mathjax' # or 'katex'
+  mathjax:
+    # src: custom_mathjax_source
+    config:
+      # MathJax config
