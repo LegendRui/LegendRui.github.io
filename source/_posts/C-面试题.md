@@ -1,9 +1,10 @@
 ---
 title: C++面试题
 date: 2019-12-18 17:14:52
-tags: 
- - C++
- categories: C++
+tags:
+    - Linux
+    - vim
+categories: C++
 ---
 
 
