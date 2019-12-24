@@ -1,11 +1,13 @@
 ---
 title: C++面试题
 date: 2019-12-18 17:14:52
-tags:
+tags: 
+ - C++
+ categories: C++
 ---
 
 
-### 1. TCP三次握手与四次挥手
+### TCP三次握手与四次挥手
 + 三次握手
     * 第一次：Client将SYN标志位置为1，随机产生一个序号seq=x，将该数据包发送给Server，Client进入SYN_SENT状态，等待Server回应
     * 第二次：Server收到数据包后根据SYN为1判断Cl6ient请求建立连接。Server将标志位SYN与ACK都置为1，ack=x+1，随机产生一个序号seq=y，将该数据包发送给Client，Server进入SYN_RCVD状态
@@ -19,15 +21,15 @@ tags:
     * 第四次：Client收到数据包后检查其中FIN，发现为1，接着将ACK=1，seq=u+1，ack=w+1，发送给数据包给Server，Client进入TIME_WAIT状态；Server收到后关闭连接，进入CLOSE状态，Client在发送给数据包后等待2MSL（报文最大生存时间）然后关闭连接，进入CLOSE状态
 ![挥手过程](../pics/huishou.jpg "huishou")
 
-### 2. 挥手与握手过程中Client与Server的状态变化
+### 挥手与握手过程中Client与Server的状态变化
 + Client：CLOSE -> SYN_SENT -> ESTABLISHED -> FIN_WAIT_1 -> FIN_WAIT_2 -> TIME_WAIT -> CLOSE
 + Server:LISTEN -> SYN_RCVD -> ESTABLISHED -> CLOSE_WAIT -> LAST_ACK -> CLOSE
 
-### 3. 为什么三次握手、四次挥手？
+### 为什么三次握手、四次挥手？
 + 三次握手：三次握手可以防止已经失效的请求连接的报文突然有传输到服务器端导致服务器资源的浪费。
 + 四次挥手：由于Server收到ClientFIN报文的时候可能还有数据需要传送，因此先发送ACK报文告知Client请求收到，等待Server发送完数据，就可以像Client发送FIN报文告知数据发送完毕
 
-### 4. TCP的滑动窗口、流量控制和拥塞控制，快重传和快恢复，超时重传
+### TCP的滑动窗口、流量控制和拥塞控制，快重传和快恢复，超时重传
 + 滑动窗口协议
     * 窗口：发送者可以连续发送一段字节序列而不需等待接受者的应答，这段连续序列的长度称为窗口
     * 滑动：窗口的大小是可以随着发送的过程而变化的
@@ -40,7 +42,7 @@ tags:
     * 快重传：如果接收方发现某个包丢失，会对发送方发送重传请求；一旦发送方收到三个一样的ack，立即重传该包；随后快恢复
     * 快恢复：首先将慢启动阈值设置为当前拥塞窗口的1/2；然后将拥塞窗口重新设置为慢启动阈值大小+3
     
-### 5.OSI七层模型和TCP/IP四层模型
+### OSI七层模型和TCP/IP四层模型
 + OSI七层模型
     * 物理层：主要协议IEEE802.3、RJ45等
     * 数据链路层：主要协议MAC、VLAN等
@@ -56,7 +58,7 @@ tags:
     * 传输层：TCP、UDP等
     * 应用层：HTTP、DNS、SMTP
 
-### 6. TCP与UDP的区别
+### TCP与UDP的区别
 + TCP是面向连接的、可靠的，而UDP是非面向连接、不可靠的
 + TCP一对一，UDP支持一对一，一对多，多对一，多对多
 + TCP具有拥塞控制与流量控制而UDP没有
@@ -65,7 +67,7 @@ tags:
 + TCP注重安全性，而UDP数据传输快
 + 用TCP的协议：FTP、Telnet、SMTP、POP3、HTTP(s)，用UDP的协议：DNS、SNMP、TFTP
 
-### 7. HTTP与HTTPS的区别
+### HTTP与HTTPS的区别
 + 区别如下：
     1. HTTP协议传输的数据是以明文方式，而HTTPS协议传输的数据则是经过TLS加密的
     2. HTTPS在TCP三次握手后，还需要进行SSL的handshake，协商加密密钥
@@ -80,19 +82,19 @@ tags:
         - 握手阶段延时较高
         - 部署成本高（购买证书，解密吃CPU）
 
-### 8.浏览器中输入URL后会发生什么
+### 浏览器中输入URL后会发生什么
 1. 域名解析获得IP地址：用到DNS、UDP协议
 2. 建立http连接：用到http协议
 3. 生成get请求报文：生成后交给TCP层处理，用到TCP与IP协议
 
-### 9. HTTP请求步骤
+### HTTP请求步骤
 1. 客户端连接到web服务器
 2. 发送http客户请求
 3. 服务器接受请求并返回http响应
 4. 释放TCP连接
 5. 客户端浏览器解析html内容
 
-### 10. socket编程中服务器端和客户端主要用到哪些函数
+### socket编程中服务器端和客户端主要用到哪些函数
 + 基于TCP的socket
     * Server
         1. 创建socket：socket()
