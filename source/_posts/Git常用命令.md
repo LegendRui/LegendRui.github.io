@@ -48,6 +48,10 @@ git remote add origin git@github.com:XXX/xxx.git
 ```
 git clone git@github.com:XXX/xxx.git
 ```
+也可以指定克隆某个分支：
+```
+git clone -b <分支名> git@github.com:XXX/xxx.git
+```
 
 #### 向远程仓库提交
 ```
