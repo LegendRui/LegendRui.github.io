@@ -41,9 +41,9 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: '',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
@@ -51,12 +51,13 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux学习笔记">
 <meta property="og:url" content="https:&#x2F;&#x2F;legendrui.github.io&#x2F;2019&#x2F;12&#x2F;18&#x2F;Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0&#x2F;index.html">
-<meta property="og:site_name" content="分享热爱">
+<meta property="og:site_name" content="Mistery&#39;s Blog">
 <meta property="og:description" content="Linux系统目录 bin：存放二进制可执行文件 boot：存放开机启动程序 dev：存放设备文件 home：存放用户 etc：存放信息和系统配置文件 lib：库文件 root：管理员宿主目录 usr：用户资源管理目录  Linux系统文件类型 普通文件（-） 目录文件（d） 字符设备文件（c） 块设备文件（b） 软连接（l） 管道文件（p） 套接字（s） 未知文件  常用命令 ls：列出文件 c">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-12-18T08:37:54.000Z">
-<meta property="article:modified_time" content="2019-12-20T13:27:45.000Z">
+<meta property="article:modified_time" content="2019-12-27T15:00:10.514Z">
 <meta property="article:author" content="Mistery">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://legendrui.github.io/2019/12/18/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
@@ -71,7 +72,7 @@
   };
 </script>
 
-  <title>Linux学习笔记 | 分享热爱</title>
+  <title>Linux学习笔记 | Mistery's Blog</title>
   
 
 
@@ -105,7 +106,7 @@
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
+  <div class="container">
     <div class="headband"></div>
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -115,13 +116,13 @@
     <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">分享热爱</span>
+        <span class="site-title">Mistery's Blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
         <p class="site-subtitle">好记性不如烂博客</p>
       <a>
-        <img class="custom-logo-image" src="http://www.acgrenwu.com/uploads/allimg/170821/1-1FR11FRK10.jpg" alt="分享热爱">
+        <img class="custom-logo-image" src="http://www.acgrenwu.com/uploads/allimg/170821/1-1FR11FRK10.jpg" alt="Mistery's Blog">
       </a>
   </div>
 
@@ -168,9 +169,34 @@
     <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
@@ -205,7 +231,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="分享热爱">
+      <meta itemprop="name" content="Mistery's Blog">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -226,7 +252,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-20 21:27:45" itemprop="dateModified" datetime="2019-12-20T21:27:45+08:00">2019-12-20</time>
+                <time title="修改时间：2019-12-27 23:00:10" itemprop="dateModified" datetime="2019-12-27T23:00:10+08:00">2019-12-27</time>
               </span>
 
           <br>
@@ -235,7 +261,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1k</span>
+              <span>1.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -254,7 +280,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Linux系统目录"><a href="#Linux系统目录" class="headerlink" title="Linux系统目录"></a>Linux系统目录</h2><ul>
+        <h4 id="Linux系统目录"><a href="#Linux系统目录" class="headerlink" title="Linux系统目录"></a>Linux系统目录</h4><ul>
 <li>bin：存放二进制可执行文件</li>
 <li>boot：存放开机启动程序</li>
 <li>dev：存放设备文件</li>
@@ -264,7 +290,7 @@
 <li>root：管理员宿主目录</li>
 <li>usr：用户资源管理目录</li>
 </ul>
-<h2 id="Linux系统文件类型"><a href="#Linux系统文件类型" class="headerlink" title="Linux系统文件类型"></a>Linux系统文件类型</h2><ul>
+<h4 id="Linux系统文件类型"><a href="#Linux系统文件类型" class="headerlink" title="Linux系统文件类型"></a>Linux系统文件类型</h4><ul>
 <li>普通文件（-）</li>
 <li>目录文件（d）</li>
 <li>字符设备文件（c）</li>
@@ -274,7 +300,7 @@
 <li>套接字（s）</li>
 <li>未知文件</li>
 </ul>
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><ul>
+<h4 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h4><ul>
 <li>ls：列出文件</li>
 <li>cd：切换目录</li>
 <li>which：查看命令路径</li>
@@ -284,7 +310,7 @@
 <li>touch：创建文件</li>
 <li>rm：删除文件（-r删除目录）</li>
 </ul>
-<h2 id="文件命令"><a href="#文件命令" class="headerlink" title="文件命令"></a>文件命令</h2><ul>
+<h4 id="文件命令"><a href="#文件命令" class="headerlink" title="文件命令"></a>文件命令</h4><ul>
 <li>chmod: 更改文件权限</li>
 </ul>
 <ul>
@@ -310,46 +336,23 @@
 </ul>
 <ul>
 <li>grep命令：找文件内容<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep -r &#39;copy&#39; .&#x2F; -n</span><br><span class="line">ps aux | grep cupsd</span><br></pre></td></tr></table></figure>
-<h2 id="vi命令"><a href="#vi命令" class="headerlink" title="vi命令"></a>vi命令</h2><ul>
-<li>命令模式<ul>
-<li>快速插入    <ul>
-<li>i： 插入光标前一个字符</li>
-<li>I： 插入行首</li>
-<li>a： 插入光标后一个字符</li>
-<li>A： 插入行末</li>
-<li>o： 向下新开一行，插入行首</li>
-<li>O： 向上新开一行，插入行首</li>
-<li>s： 删除光标字符后开始插入</li>
-<li>S： 删除当前行后开始插入</li>
-</ul>
-</li>
-<li>跳转<ul>
-<li>h：左移</li>
-<li>j：下移</li>
-<li>k：上移</li>
-<li>l：右移</li>
-<li>跳转指定行： 命令模式下——N(代表行号)G 、 末行模式下——：N</li>
-<li>跳转行首： gg</li>
-<li>跳转行尾：G</li>
-</ul>
-</li>
-<li>删除<ul>
-<li>x：删除光标字符</li>
-<li>dw：删除光标至单词尾</li>
-<li>D/d$：删除光标至行尾</li>
-<li>d0：删除光标至行首</li>
-</ul>
-</li>
-<li>其他功能<ul>
-<li>%：跳转至定括号</li>
-<li>自动格式化程序：命令模式下——gg=G</li>
-</ul>
+
 </li>
 </ul>
-</li>
+<h4 id="gcc编译"><a href="#gcc编译" class="headerlink" title="gcc编译"></a>gcc编译</h4><p>编译分为四个步骤：</p>
+<h5 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h5><p>任务：展开头文件，宏替换，替换条件编译，删除注释、空行和空格。<br>指令：<code>gcc -E file</code>。<br>生成文件：file.i  </p>
+<h5 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h5><p>任务：检查语法规范。<br>指令：<code>gcc -S file[.i]</code>。<br>生成文件：file.s</p>
+<h5 id="汇编"><a href="#汇编" class="headerlink" title="汇编"></a>汇编</h5><p>任务：将汇编指令翻译成机器指令。<br>指令：<code>gcc -c file[.s]</code>。<br>生成文件：file.o  </p>
+<h5 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h5><p>任务：数据段合并，地址回填。<br>指令：<code>gcc file[.o]</code>。<br>生成文件：file.out</p>
+<h5 id="其他常用参数"><a href="#其他常用参数" class="headerlink" title="其他常用参数"></a>其他常用参数</h5><ul>
+<li>-I：指定头文件所在目录位置。</li>
+<li>-g：添加调试语句，以便使用gdb调试</li>
+<li>-Wall：显示所有警告信息</li>
+<li>-D：向程序动态注册宏定义</li>
 </ul>
-</li>
-</ul>
+<h4 id="静态库制作及使用"><a href="#静态库制作及使用" class="headerlink" title="静态库制作及使用"></a>静态库制作及使用</h4><h5 id="将-c生成-o文件"><a href="#将-c生成-o文件" class="headerlink" title="将.c生成.o文件"></a>将.c生成.o文件</h5><p>命令：<code>gcc -c a.c -o a.o</code></p>
+<h5 id="使用ar工具制作静态库"><a href="#使用ar工具制作静态库" class="headerlink" title="使用ar工具制作静态库"></a>使用ar工具制作静态库</h5><p>命令：<code>ar rcs lib[库名].a a.o</code></p>
+<h5 id="编辑静态库到可执行文件"><a href="#编辑静态库到可执行文件" class="headerlink" title="编辑静态库到可执行文件"></a>编辑静态库到可执行文件</h5><p>命令：<code>gcc test.c lib[库名].a -o test</code></p>
 
     </div>
 
@@ -358,6 +361,10 @@
     
 
       <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"><i class="fa fa-tag"></i> linux</a>
+          </div>
 
         
 
@@ -429,7 +436,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux系统目录"><span class="nav-number">1.</span> <span class="nav-text">Linux系统目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux系统文件类型"><span class="nav-number">2.</span> <span class="nav-text">Linux系统文件类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用命令"><span class="nav-number">3.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件命令"><span class="nav-number">4.</span> <span class="nav-text">文件命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vi命令"><span class="nav-number">5.</span> <span class="nav-text">vi命令</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux系统目录"><span class="nav-number">1.</span> <span class="nav-text">Linux系统目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux系统文件类型"><span class="nav-number">2.</span> <span class="nav-text">Linux系统文件类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用命令"><span class="nav-number">3.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件命令"><span class="nav-number">4.</span> <span class="nav-text">文件命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#gcc编译"><span class="nav-number">5.</span> <span class="nav-text">gcc编译</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#预处理"><span class="nav-number">5.1.</span> <span class="nav-text">预处理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#编译"><span class="nav-number">5.2.</span> <span class="nav-text">编译</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#汇编"><span class="nav-number">5.3.</span> <span class="nav-text">汇编</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#链接"><span class="nav-number">5.4.</span> <span class="nav-text">链接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#其他常用参数"><span class="nav-number">5.5.</span> <span class="nav-text">其他常用参数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#静态库制作及使用"><span class="nav-number">6.</span> <span class="nav-text">静态库制作及使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#将-c生成-o文件"><span class="nav-number">6.1.</span> <span class="nav-text">将.c生成.o文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用ar工具制作静态库"><span class="nav-number">6.2.</span> <span class="nav-text">使用ar工具制作静态库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#编辑静态库到可执行文件"><span class="nav-number">6.3.</span> <span class="nav-text">编辑静态库到可执行文件</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -452,13 +459,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -500,7 +507,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">9k</span>
+    <span title="站点总字数">10k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
@@ -530,12 +537,8 @@
   
   <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
   <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
 <script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
 
 
 <script src="/js/schemes/pisces.js"></script>
@@ -560,6 +563,8 @@
 
 
 
+  
+<script src="/js/local-search.js"></script>
 
 
 
@@ -569,6 +574,21 @@
 
 
 
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'default',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
 
 
 

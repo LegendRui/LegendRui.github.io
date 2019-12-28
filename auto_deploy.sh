@@ -1,5 +1,6 @@
-clear
+cls
 git checkout code
+git pull origin code
 hexo clean
 hexo g
 hexo d
