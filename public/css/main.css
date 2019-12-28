@@ -1268,7 +1268,15 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
+<<<<<<< HEAD
   background: #f29973;
+=======
+<<<<<<< HEAD
+  background: #f7d69e;
+=======
+  background: #4eccb8;
+>>>>>>> refs/remotes/origin/code
+>>>>>>> 2e0594889aa56c7f6460b2cf484134caea030cd1
   border-radius: 50%;
   content: ' ';
   display: inline-block;
