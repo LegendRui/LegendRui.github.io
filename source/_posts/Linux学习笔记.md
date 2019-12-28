@@ -106,5 +106,9 @@ ps aux | grep cupsd
 ##### 使用ar工具制作静态库
 命令：`ar rcs lib[库名].a a.o`
 
+##### 制作静态库的头文件
+
 ##### 编辑静态库到可执行文件
 命令：`gcc test.c lib[库名].a -o test`
+
+####
