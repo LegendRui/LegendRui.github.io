@@ -111,4 +111,33 @@ ps aux | grep cupsd
 ##### 编辑静态库到可执行文件
 命令：`gcc test.c lib[库名].a -o test`
 
-####
+#### 动态库的制作及使用
+##### 将.c生成与位置无关的.o代码
+```
+gcc -c file.c -o file.o -fPIC
+```
+
+##### 制作动态库
+```
+gcc -shared -o lib[库名].so file.o
+```
+
+##### 编译是指定动态库
+```
+gcc test.c -o test -l [库名] -L [库路径]
+```
+
+##### 配置动态链接库的路径
++ 直接在终端执行`export LD_LIBRARY_PATH=[库路径]`
++ 修改终端配置文件
+    * 在终端配置文件.bashrc下添加`export LD_LIBRARY_PATH=[库路径]`
+    * 使配置文件生效： `. .bashrc` / `source .bashrc`  / 重启一个终端
++ 拷贝库到系统库路径`/lib`下
++ 配置链接器
+    * 在链接器配置文件中添加动态链接库的绝对路径
+    * 使配置文件生效：`sudo ldconfig -v`
+
+#### 阻塞与非阻塞IO
+**阻塞产生的场景**：读网络文件和设备文件时，读普通文件不会产生阻塞。
+
+
