@@ -1,5 +1,5 @@
 ---
-title: open、read与write函数
+title: linux下文件的读写操作
 date: 2020-01-05 14:29:46
 tags:
     - linux
@@ -78,6 +78,44 @@ ssize_t read(int fd, const void *buf, size_t count)
 + 成功：写入的字节数
 + 失败：-1，并设置error
 
+**例：**
+```
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <string.h>
+
+int main()
+{
+    int fd = 0;
+    char buf[1024];
+    int n;
+    fd = open("/dev/tty", O_RDONLY | O_NONBLOCK);
+    if (fd < 0) {
+        perror("open /dev/tty");
+        exit(1);
+    }
+
+tryagain:
+    n = read(fd, buf, 10);
+    if (n < 0) {
+        if (errno != EAGAIN) {
+            perror("read /dev/tty");
+            exit(1);
+        } else {
+        write(STDOUT_FILENO, "try again\n", strlen("try again\n"));
+        sleep(2);
+        goto tryagain;
+        }
+    } 
+    write(STDOUT_FILENO, buf, n);
+    close(fd);
+
+    return 0;
+}
+```
 **注：**读网络文件和设备文件时，读普通文件不会产生阻塞。阻塞和非阻塞时文件的属性，而不是read/write函数的属性。
 
 #### fcntl函数
@@ -100,4 +138,61 @@ int fcntl(int fd, int cmd, ... /* arg */)
 int flags = fcntl(fd, F_GETFL);
 flags |= O_NONBLOCK;
 fcntl(fd, F_SETFL, flags);
+```
+
+#### lseek函数
+##### 原型
+```
+off_t lseek(int fd, off_t offset, int whence)
+```
+
+##### 功能
+可以通过`offset`参数重定位文件描述符`fd`所对应的文件的偏移量
+
+##### 参数
++ fd：待操作文件的文件描述符
++ offset：偏移量
++ whence：起始偏移位置
+    - SEEK_SET：定位为文件起始
+    - SEEK_CUR：定位为当前位置
+    - SEEK_END：定位为文件末尾
+
+##### 返回值
+成功：返回从文件起始开始的偏移值
+失败：-1
+**注：**文件的读、写是用一个偏移量。
+
+**例：**
+```
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <string.h>
+
+int main()
+{
+    int fd, n;
+    char *msg = "It's a test for lseek.\n";
+    char ch;
+
+    fd = open("lseek.txt", O_RDWR | O_CREAT, 0664);
+    if (n < 0) {
+        perror("open lseek.txt error");
+        exit(1);
+    }
+
+    write(fd, msg, strlen(msg));
+    lseek(fd, 0, SEEK_SET);
+
+    while ((n = read(fd, &ch, 1))) {
+        if (n < 0) {
+            perror("read error");
+            exit(1);
+        }
+        write(STDOUT_FILENO, &ch, n);
+    }
+    return 0;
+}
 ```
