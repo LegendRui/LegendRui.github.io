@@ -8,29 +8,29 @@ categories: C++
 ---
 
 
-### TCP三次握手与四次挥手
-+ 三次握手
-    * 第一次：Client将SYN标志位置为1，随机产生一个序号seq=x，将该数据包发送给Server，Client进入SYN_SENT状态，等待Server回应
-    * 第二次：Server收到数据包后根据SYN为1判断Cl6ient请求建立连接。Server将标志位SYN与ACK都置为1，ack=x+1，随机产生一个序号seq=y，将该数据包发送给Client，Server进入SYN_RCVD状态
-    * 第三次：Client收到确认数据包后，检查是否ack=x+1，如果正确则将ACK置为1，ack=y+1，seq=x+1，并将该数据包发送给Server，Server收到后确认是否ACK=1，是否ack=y+1，如果正确则连接建立成功，Client和Server进入ESTABLISHED状态，三次握手结束 
+#### 1 TCP三次握手与四次挥手
+##### 三次握手
+* 第一次：Client将SYN标志位置为1，随机产生一个序号seq=x，将该数据包发送给Server，Client进入SYN_SENT状态，等待Server回应
+* 第二次：Server收到数据包后根据SYN为1判断Cl6ient请求建立连接。Server将标志位SYN与ACK都置为1，ack=x+1，随机产生一个序号seq=y，将该数据包发送给Client，Server进入SYN_RCVD状态
+* 第三次：Client收到确认数据包后，检查是否ack=x+1，如果正确则将ACK置为1，ack=y+1，seq=x+1，并将该数据包发送给Server，Server收到后确认是否ACK=1，是否ack=y+1，如果正确则连接建立成功，Client和Server进入ESTABLISHED状态，三次握手结束 
 ![握手过程](/images/woshou.jpg "woshou")
 
-+ 四次挥手
-    * 第一次：Client将FIN标志位置为1，随机产生一个序号seq=u,将该数据包发送给Server，此后Client停止发送数据，Client进入FIN_WAIT_1状态
-    * 第二次：Server收到数据包后根据FIN=1判断Client请求断开连接，Server将ACK=1，将ack=u+1，随机产生一个序号seq=v，发送该数据包，Server进入CLOSE_WAIT状态，等待将数据发送完；Client收到该数据包后进入CLOSE_WAIT_2状态
-    * 第三次：Server将FIN=1，ACK=1，ack=u+1，随机产生一个序号seq=w，将该数据包发送给Client，Server进入LAST_ACK状态
-    * 第四次：Client收到数据包后检查其中FIN，发现为1，接着将ACK=1，seq=u+1，ack=w+1，发送给数据包给Server，Client进入TIME_WAIT状态；Server收到后关闭连接，进入CLOSE状态，Client在发送给数据包后等待2MSL（报文最大生存时间）然后关闭连接，进入CLOSE状态
+##### 四次挥手
+* 第一次：Client将FIN标志位置为1，随机产生一个序号seq=u,将该数据包发送给Server，此后Client停止发送数据，Client进入FIN_WAIT_1状态
+* 第二次：Server收到数据包后根据FIN=1判断Client请求断开连接，Server将ACK=1，将ack=u+1，随机产生一个序号seq=v，发送该数据包，Server进入CLOSE_WAIT状态，等待将数据发送完；Client收到该数据包后进入CLOSE_WAIT_2状态
+* 第三次：Server将FIN=1，ACK=1，ack=u+1，随机产生一个序号seq=w，将该数据包发送给Client，Server进入LAST_ACK状态
+* 第四次：Client收到数据包后检查其中FIN，发现为1，接着将ACK=1，seq=u+1，ack=w+1，发送给数据包给Server，Client进入TIME_WAIT状态；Server收到后关闭连接，进入CLOSE状态，Client在发送给数据包后等待2MSL（报文最大生存时间）然后关闭连接，进入CLOSE状态
 ![挥手过程](/images/huishou.jpg "huishou")
 
-### 挥手与握手过程中Client与Server的状态变化
+#### 2 挥手与握手过程中Client与Server的状态变化
 + Client：CLOSE -> SYN_SENT -> ESTABLISHED -> FIN_WAIT_1 -> FIN_WAIT_2 -> TIME_WAIT -> CLOSE
 + Server:LISTEN -> SYN_RCVD -> ESTABLISHED -> CLOSE_WAIT -> LAST_ACK -> CLOSE
 
-### 为什么三次握手、四次挥手？
+#### 3 为什么三次握手、四次挥手？
 + 三次握手：三次握手可以防止已经失效的请求连接的报文突然有传输到服务器端导致服务器资源的浪费。
 + 四次挥手：由于Server收到ClientFIN报文的时候可能还有数据需要传送，因此先发送ACK报文告知Client请求收到，等待Server发送完数据，就可以像Client发送FIN报文告知数据发送完毕
 
-### TCP的滑动窗口、流量控制和拥塞控制，快重传和快恢复，超时重传
+#### 4 TCP的滑动窗口、流量控制和拥塞控制，快重传和快恢复，超时重传
 + 滑动窗口协议
     * 窗口：发送者可以连续发送一段字节序列而不需等待接受者的应答，这段连续序列的长度称为窗口
     * 滑动：窗口的大小是可以随着发送的过程而变化的
@@ -43,7 +43,7 @@ categories: C++
     * 快重传：如果接收方发现某个包丢失，会对发送方发送重传请求；一旦发送方收到三个一样的ack，立即重传该包；随后快恢复
     * 快恢复：首先将慢启动阈值设置为当前拥塞窗口的1/2；然后将拥塞窗口重新设置为慢启动阈值大小+3
     
-### OSI七层模型和TCP/IP四层模型
+#### 5 OSI七层模型和TCP/IP四层模型
 + OSI七层模型
     * 物理层：主要协议IEEE802.3、RJ45等
     * 数据链路层：主要协议MAC、VLAN等
@@ -59,7 +59,7 @@ categories: C++
     * 传输层：TCP、UDP等
     * 应用层：HTTP、DNS、SMTP
 
-### TCP与UDP的区别
+#### 6 TCP与UDP的区别
 + TCP是面向连接的、可靠的，而UDP是非面向连接、不可靠的
 + TCP一对一，UDP支持一对一，一对多，多对一，多对多
 + TCP具有拥塞控制与流量控制而UDP没有
@@ -68,7 +68,7 @@ categories: C++
 + TCP注重安全性，而UDP数据传输快
 + 用TCP的协议：FTP、Telnet、SMTP、POP3、HTTP(s)，用UDP的协议：DNS、SNMP、TFTP
 
-### HTTP与HTTPS的区别
+#### 7 HTTP与HTTPS的区别
 + 区别如下：
     1. HTTP协议传输的数据是以明文方式，而HTTPS协议传输的数据则是经过TLS加密的
     2. HTTPS在TCP三次握手后，还需要进行SSL的handshake，协商加密密钥
@@ -83,19 +83,19 @@ categories: C++
         - 握手阶段延时较高
         - 部署成本高（购买证书，解密吃CPU）
 
-### 浏览器中输入URL后会发生什么
+#### 8浏览器中输入URL后会发生什么
 1. 域名解析获得IP地址：用到DNS、UDP协议
 2. 建立http连接：用到http协议
 3. 生成get请求报文：生成后交给TCP层处理，用到TCP与IP协议
 
-### HTTP请求步骤
+#### 9 HTTP请求步骤
 1. 客户端连接到web服务器
 2. 发送http客户请求
 3. 服务器接受请求并返回http响应
 4. 释放TCP连接
 5. 客户端浏览器解析html内容
 
-### socket编程中服务器端和客户端主要用到哪些函数
+#### 10 socket编程中服务器端和客户端主要用到哪些函数
 + 基于TCP的socket
     * Server
         1. 创建socket：socket()
@@ -132,7 +132,7 @@ categories: C++
         6. 关闭连接
 ![基于UDP的socket](/images/udp_socket.png)
 
-### Post与Get的区别
+#### 11 Post与Get的区别
 + 表面区别
 
 | |Get|Post
@@ -155,20 +155,21 @@ categories: C++
 [1] https://www.cnblogs.com/logsharing/p/8448446.html  
 [2] https://baijiahao.baidu.com/s?id=1626599028653203490&wfr=spider&for=pc
 
-### HTTP请求头部
+#### 12 HTTP请求头部
 + 请求行
     * 请求方法
     * 请求URL
     * HTTP协议及版本
 + 报文头
 + 报文体
-### 指针常量与常量指针
+
+#### 12 指针常量与常量指针
 区别：*在前在是指针常量，const在前则是常量指针
 
 + 指针常量：不能改变指针的指向，int* const p = &a;
 + 常量指针：不能改变指针指向的值， const int *p;
 
-### C++内存布局（从高到低的顺序）以及为什么这么布局？
+#### 12 C++内存布局（从高到低的顺序）以及为什么这么布局？
 + 内核空间（1G）
 + 栈（向下增长）：局部变量
 + 内存映射段：存放静态库、动态库以及文件映射等
@@ -180,22 +181,22 @@ categories: C++
     * 可执行代码
     * 只读常量
 
-### Linux C++调试工具
+#### 13 Linux C++调试工具
 https://www.cnblogs.com/lidabo/p/4377545.html
 
-### 为什么构造函数不可以是虚函数？
+#### 14 为什么构造函数不可以是虚函数？
 + 构造函数不需要是虚函数，也不允许是虚函数。因为当创建一个对象时，我们总是要明确指定对象的类型，尽管我们可能通过基类的指针或引用去访问它。
 + 从实现的角度看。虚函数表总是在构造函数调用之后才建立，因而构造函数不可能成为虚函数。
 
 
-### 红黑树的特点
+#### 15 红黑树的特点
 1. 每个节点要么是红的，要么是黑的；
 2. 根节点是黑的；
 3. 每个叶节点都是黑的；
 4. 如果一个节点是红的，那么它的两个子节点都是黑的；
 5. 对于任意一个节点而言，其到叶节点尾端NULL指针的每条路径都经过相同数目的黑节点。
 
-### AVL树和红黑树的定义与区别
+#### 16 AVL树和红黑树的定义与区别
 + AVL树：AVL（平衡二叉树），是一种特殊的排序二叉树，其左右子树也是平衡二叉树，且左右子树高度差的绝对值不大于1。
 + 红黑树：红黑树是一种二叉查找树，但在每个节点增加了一个存储位表示节点的颜色，非红即黑。通过对任何一条根到叶子的路径上各个节点着色的方式的限制，红黑树确保没有一条路径会比其他路径长2倍。故，红黑树是一种弱平衡二叉树。红黑树有以下5个特点：
     1. 每个节点要么是红的，要么是黑的；
@@ -205,7 +206,7 @@ https://www.cnblogs.com/lidabo/p/4377545.html
     5. 对于任意一个节点而言，其到叶节点尾端NULL指针的每条路径都经过相同数目的黑节点。
 + 区别：AVL树是高度平衡的，频繁的插入和删除，会引起频繁的rebalance，导致效率下降；红黑树不是高度平衡的，算是一种折中，插入最多2次旋转，删除最多3次旋转。
 
-### B-树与B+树的定义
+#### 17 B-树与B+树的定义
 + B树：一颗m阶B树定义如下
     * 每个节点最多有m-1个关键字
     * 根节点最少可以只有1个关键字
@@ -219,13 +220,13 @@ https://www.cnblogs.com/lidabo/p/4377545.html
     * 内部节点中的key都按从小到大的顺序排列，对于内部节点中的一个key，左子树中所有的key都*小于*它，右子树中的key都*大于等于*它
     * 每个叶子节点都存有下一个相邻叶子节点的指针，叶子节点本身根据关键字从小到大形成链表
 
-### 堆与栈的区别
+#### 18 堆与栈的区别
 + 堆是有低地址向高地址扩展，而栈是高地址向低地址扩展
 + 堆中的内存需要手动的申请与释放，而栈中的地址是由OS自动的申请和释放的
 + 堆中频繁的调用malloc和free会产生内存碎片，而栈不会
 + 堆的分配效率低，而栈的分配效率高
 
-### 常见排序算法总结
+#### 19 常见排序算法总结
 
 算法|平均时间复杂度|最好时间复杂度|最坏时间复杂度|空间复杂度|是否稳定
 --|:--:|:--:|:--:|:--:|--:
@@ -237,7 +238,7 @@ https://www.cnblogs.com/lidabo/p/4377545.html
 快速排序|O(nlogn)|O(nlogn)|O(n^2)|O(nlogn)|不稳定
 堆排序|O(nlogn)|O(nlogn)|O(nlogn)|O(1)|不稳定
 
-### 常用设计模式
+#### 20 常用设计模式
 + 单例模式：主要解决全局使用的类频繁的创建和销毁的问题。单例模式下可以确保一个类只有一个实例，而且自行化实例并向整个系统提供这个实例。
     * 多线程安全问题
         - 饿汉式：基于class loader机制避免多线程同步问题，但可能
@@ -249,14 +250,14 @@ https://www.cnblogs.com/lidabo/p/4377545.html
 
 + 装饰器模式：对已经存在的某些类进行装饰，以拓展一些功能，从而动态的为一个对象增加新的功能。
 
-### OOP设计模式五大原则
+#### 21 OOP设计模式五大原则
 + 单一职责：避免相同的职责分配到不同的类中；避免一个类承担太多职责
 + 接口隔离：客户端不应实现一些它们不会使用的接口
 + 开放-封闭：在扩展性方面是开放的而在更改性方面是封闭的
 + 替换：子类型必须能替换掉它们的父类、并且出现在父类出现的任何地方
 + 依赖倒置：上层模块不应该依赖于下层模块
 
-### 手写Singleton模式
+#### 22 手写Singleton模式
 ```
 template<typename T> 
 class Singleton {

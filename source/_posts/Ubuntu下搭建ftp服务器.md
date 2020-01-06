@@ -7,12 +7,12 @@ tags:
 categories: Linux
 ---
 
-### 下载vsftpd  
+#### 1 下载vsftpd  
 ```
 sudo apt-get install vsftpd
 ```
 
-### 修改配置文件
+#### 2 修改配置文件
 
 ```
 sudo vi /etc/vsftpd.conf
@@ -28,7 +28,7 @@ anon_mkdir_write_enable=YES
 ```
 主要是打开wirte权限，其他是我嫌麻烦允许匿名上传，反正没人知道我的vps的ip...
 
-### 创建ftp目录
+#### 3 创建ftp目录
 在home文件夹下创建一个ftp的工作目录
 
 ```
@@ -37,19 +37,19 @@ sudo mkdir /home/ftp/download
 sudo mkdir /home/ftp/upload
 ```
 
-### 添加ftp用户
+#### 4 添加ftp用户
 ```
 sudo useradd -d /home/ftp -s bin/bash username
 sudo passwd username
 ```
 
-### 启动vsftpd服务器
+#### 5 启动vsftpd服务器
 
 ```
 sudo service vsftpd start
 ```
 
-### 登录测试
+#### 6 登录测试
 
 ```
 ftp 127.0.0.1

@@ -6,45 +6,45 @@ tags:
 categories: 
 ---
 
-#### 初始化本地仓库
+#### 1 初始化本地仓库
 ```
 git init
 ```
 
-#### 向本地仓库添加文件
+#### 2 向本地仓库添加文件
 ```
 git add a.txt       % 添加a.txt
 git add *           % 添加所有文件
 ```
 
-#### 从本地仓库删除文件
+#### 3 从本地仓库删除文件
 ```
 git rm a.txt        % 删除a.txt
 git rm -r dir       % 删除目录dir
 ```
 
-#### 向本地仓库提交修改
+#### 4 向本地仓库提交修改
 ```
 git commit -m "comment"
 ```
 
 
-#### 查看本地仓库状态
+#### 5 查看本地仓库状态
 ```
 git status
 ```
 
-#### 查看日志
+#### 6 查看日志
 ```
 git log --pretty=oneline
 ```
 
-#### 添加远程仓库
+#### 7 添加远程仓库
 ```
 git remote add origin git@github.com:XXX/xxx.git
 ```
 
-#### 克隆仓库
+#### 8 克隆仓库
 ```
 git clone git@github.com:XXX/xxx.git
 ```
@@ -53,12 +53,12 @@ git clone git@github.com:XXX/xxx.git
 git clone -b <分支名> git@github.com:XXX/xxx.git
 ```
 
-#### 向远程仓库提交
+#### 9 向远程仓库提交
 ```
 git push -u origin master
 ```
 
-#### 从远程仓库同步
+#### 10 从远程仓库同步
 ``` 
 git pull <远程主机名> <远程分支名>:<本地分支名>
 ```

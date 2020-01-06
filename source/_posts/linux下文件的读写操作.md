@@ -6,10 +6,10 @@ tags:
 categories: linux
 ---
 
-#### open函数
+#### 1 open函数
 open函数有2个原型，一为接受两个参数，一为接受三个参数。
 
-##### 原型一：接受两个参数
+##### 1.1 原型一：接受两个参数
 ```
 int open(char *pathname, int flags)
 ```
@@ -21,7 +21,7 @@ int open(char *pathname, int flags)
 + 成功：返回打开文件得到的文件描述符
 + 失败：-1，并设置error
 
-##### 原型二：接受三个参数
+##### 1.2 原型二：接受三个参数
 ```
 int open(char *pathname, int flags)
 ```
@@ -34,7 +34,7 @@ int open(char *pathname, int flags)
 + 成功：返回打开文件得到的文件描述符
 + 失败：-1，并设置error
 
-#### close函数
+#### 2 close函数
 ##### 原型
 ```
 int close(int fd);
@@ -47,7 +47,7 @@ int close(int fd);
 +0：成功
 +-1：失败
 
-#### read函数
+#### 3 read函数
 
 ##### 原型
 ```
@@ -63,7 +63,7 @@ ssize_t read(int fd, void *buf, size_t count)
 + 失败：-1，并设置error
 + -1：
 
-#### write函数
+#### 4 write函数
 
 ##### 原型
 ```
@@ -118,7 +118,7 @@ tryagain:
 ```
 **注：**读网络文件和设备文件时，读普通文件不会产生阻塞。阻塞和非阻塞时文件的属性，而不是read/write函数的属性。
 
-#### fcntl函数
+#### 5 fcntl函数
 可以在不重新打开文件的情况下，修改文件的属性。
 
 ##### 原型
@@ -140,7 +140,7 @@ flags |= O_NONBLOCK;
 fcntl(fd, F_SETFL, flags);
 ```
 
-#### lseek函数
+#### 6 lseek函数
 ##### 原型
 ```
 off_t lseek(int fd, off_t offset, int whence)
@@ -196,3 +196,43 @@ int main()
     return 0;
 }
 ```
+
+#### 7 stat函数
+##### 原型
+```
+int stat(const char *path, struct stat* buf)
+```
+
+##### 参数
++ path：文件路径
++ buf：传出参数，存放文件属性的结构体
+
+##### 返回值
++ 成功：0
++ 失败：-1，设置errno
+
+**例：**查看文件大小。
+```
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/stat.h>
+
+int main(int argc, char *argv[])
+{
+	struct stat buf;
+
+	int ret = stat(argv[1], &buf);
+	if (ret == -1) {
+		perror("stat error");
+		exit(1);
+	}
+
+	printf("file size: %d\n", buf.st_size);
+
+	return 0;
+}
+
+```
+**注：**stat函数是可以穿透符号连接的（即，如果操查看的是软连接，得到的是软连接指向的文件是属性）。如果不想穿透符号连接，可以使用lstat函数。
