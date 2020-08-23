@@ -1268,11 +1268,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-<<<<<<< Updated upstream
-  background: #134f62;
-=======
-  background: #377d7e;
->>>>>>> Stashed changes
+  background: #d7ffff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
