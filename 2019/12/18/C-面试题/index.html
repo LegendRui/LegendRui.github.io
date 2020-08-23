@@ -47,19 +47,19 @@
   };
 </script>
 
-  <meta name="description" content="TCP三次握手与四次挥手 三次握手  第一次：Client将SYN标志位置为1，随机产生一个序号seq&#x3D;x，将该数据包发送给Server，Client进入SYN_SENT状态，等待Server回应 第二次：Server收到数据包后根据SYN为1判断Cl6ient请求建立连接。Server将标志位SYN与ACK都置为1，ack&#x3D;x+1，随机产生一个序号seq&#x3D;y，将该数据包发送给Client，Ser">
+  <meta name="description" content="1 TCP三次握手与四次挥手三次握手 第一次：Client将SYN标志位置为1，随机产生一个序号seq&#x3D;x，将该数据包发送给Server，Client进入SYN_SENT状态，等待Server回应 第二次：Server收到数据包后根据SYN为1判断Cl6ient请求建立连接。Server将标志位SYN与ACK都置为1，ack&#x3D;x+1，随机产生一个序号seq&#x3D;y，将该数据包发送给Client，Ser">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++面试题">
 <meta property="og:url" content="https:&#x2F;&#x2F;legendrui.github.io&#x2F;2019&#x2F;12&#x2F;18&#x2F;C-%E9%9D%A2%E8%AF%95%E9%A2%98&#x2F;index.html">
-<meta property="og:site_name" content="分享热爱">
-<meta property="og:description" content="TCP三次握手与四次挥手 三次握手  第一次：Client将SYN标志位置为1，随机产生一个序号seq&#x3D;x，将该数据包发送给Server，Client进入SYN_SENT状态，等待Server回应 第二次：Server收到数据包后根据SYN为1判断Cl6ient请求建立连接。Server将标志位SYN与ACK都置为1，ack&#x3D;x+1，随机产生一个序号seq&#x3D;y，将该数据包发送给Client，Ser">
+<meta property="og:site_name" content="Mistery&#39;s Blog">
+<meta property="og:description" content="1 TCP三次握手与四次挥手三次握手 第一次：Client将SYN标志位置为1，随机产生一个序号seq&#x3D;x，将该数据包发送给Server，Client进入SYN_SENT状态，等待Server回应 第二次：Server收到数据包后根据SYN为1判断Cl6ient请求建立连接。Server将标志位SYN与ACK都置为1，ack&#x3D;x+1，随机产生一个序号seq&#x3D;y，将该数据包发送给Client，Ser">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;legendrui.github.io&#x2F;images&#x2F;woshou.jpg">
 <meta property="og:image" content="https:&#x2F;&#x2F;legendrui.github.io&#x2F;images&#x2F;huishou.jpg">
 <meta property="og:image" content="https:&#x2F;&#x2F;legendrui.github.io&#x2F;images&#x2F;tcp_socket.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;legendrui.github.io&#x2F;images&#x2F;udp_socket.png">
 <meta property="article:published_time" content="2019-12-18T09:14:52.000Z">
-<meta property="article:modified_time" content="2019-12-24T11:25:49.899Z">
+<meta property="article:modified_time" content="2020-08-23T12:50:22.310Z">
 <meta property="article:author" content="Mistery">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="vim">
@@ -78,7 +78,7 @@
   };
 </script>
 
-  <title>C++面试题 | 分享热爱</title>
+  <title>C++面试题 | Mistery's Blog</title>
   
 
 
@@ -122,13 +122,13 @@
     <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">分享热爱</span>
+        <span class="site-title">Mistery's Blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
         <p class="site-subtitle">好记性不如烂博客</p>
       <a>
-        <img class="custom-logo-image" src="http://www.acgrenwu.com/uploads/allimg/170821/1-1FR11FRK10.jpg" alt="分享热爱">
+        <img class="custom-logo-image" src="http://www.acgrenwu.com/uploads/allimg/170821/1-1FR11FRK10.jpg" alt="Mistery's Blog">
       </a>
   </div>
 
@@ -212,7 +212,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="分享热爱">
+      <meta itemprop="name" content="Mistery's Blog">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -233,7 +233,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-24 19:25:49" itemprop="dateModified" datetime="2019-12-24T19:25:49+08:00">2019-12-24</time>
+                <time title="修改时间：2020-08-23 20:50:22" itemprop="dateModified" datetime="2020-08-23T20:50:22+08:00">2020-08-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -272,32 +272,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="TCP三次握手与四次挥手"><a href="#TCP三次握手与四次挥手" class="headerlink" title="TCP三次握手与四次挥手"></a>TCP三次握手与四次挥手</h3><ul>
-<li><p>三次握手</p>
-<ul>
+        <h4 id="1-TCP三次握手与四次挥手"><a href="#1-TCP三次握手与四次挥手" class="headerlink" title="1 TCP三次握手与四次挥手"></a>1 TCP三次握手与四次挥手</h4><h5 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h5><ul>
 <li>第一次：Client将SYN标志位置为1，随机产生一个序号seq=x，将该数据包发送给Server，Client进入SYN_SENT状态，等待Server回应</li>
 <li>第二次：Server收到数据包后根据SYN为1判断Cl6ient请求建立连接。Server将标志位SYN与ACK都置为1，ack=x+1，随机产生一个序号seq=y，将该数据包发送给Client，Server进入SYN_RCVD状态</li>
 <li>第三次：Client收到确认数据包后，检查是否ack=x+1，如果正确则将ACK置为1，ack=y+1，seq=x+1，并将该数据包发送给Server，Server收到后确认是否ACK=1，是否ack=y+1，如果正确则连接建立成功，Client和Server进入ESTABLISHED状态，三次握手结束<br><img src="/images/woshou.jpg" alt="握手过程" title="woshou"></li>
 </ul>
-</li>
-<li><p>四次挥手</p>
-<ul>
+<h5 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h5><ul>
 <li>第一次：Client将FIN标志位置为1，随机产生一个序号seq=u,将该数据包发送给Server，此后Client停止发送数据，Client进入FIN_WAIT_1状态</li>
 <li>第二次：Server收到数据包后根据FIN=1判断Client请求断开连接，Server将ACK=1，将ack=u+1，随机产生一个序号seq=v，发送该数据包，Server进入CLOSE_WAIT状态，等待将数据发送完；Client收到该数据包后进入CLOSE_WAIT_2状态</li>
 <li>第三次：Server将FIN=1，ACK=1，ack=u+1，随机产生一个序号seq=w，将该数据包发送给Client，Server进入LAST_ACK状态</li>
 <li>第四次：Client收到数据包后检查其中FIN，发现为1，接着将ACK=1，seq=u+1，ack=w+1，发送给数据包给Server，Client进入TIME_WAIT状态；Server收到后关闭连接，进入CLOSE状态，Client在发送给数据包后等待2MSL（报文最大生存时间）然后关闭连接，进入CLOSE状态<br><img src="/images/huishou.jpg" alt="挥手过程" title="huishou"></li>
 </ul>
-</li>
-</ul>
-<h3 id="挥手与握手过程中Client与Server的状态变化"><a href="#挥手与握手过程中Client与Server的状态变化" class="headerlink" title="挥手与握手过程中Client与Server的状态变化"></a>挥手与握手过程中Client与Server的状态变化</h3><ul>
+<h4 id="2-挥手与握手过程中Client与Server的状态变化"><a href="#2-挥手与握手过程中Client与Server的状态变化" class="headerlink" title="2 挥手与握手过程中Client与Server的状态变化"></a>2 挥手与握手过程中Client与Server的状态变化</h4><ul>
 <li>Client：CLOSE -&gt; SYN_SENT -&gt; ESTABLISHED -&gt; FIN_WAIT_1 -&gt; FIN_WAIT_2 -&gt; TIME_WAIT -&gt; CLOSE</li>
 <li>Server:LISTEN -&gt; SYN_RCVD -&gt; ESTABLISHED -&gt; CLOSE_WAIT -&gt; LAST_ACK -&gt; CLOSE</li>
 </ul>
-<h3 id="为什么三次握手、四次挥手？"><a href="#为什么三次握手、四次挥手？" class="headerlink" title="为什么三次握手、四次挥手？"></a>为什么三次握手、四次挥手？</h3><ul>
+<h4 id="3-为什么三次握手、四次挥手？"><a href="#3-为什么三次握手、四次挥手？" class="headerlink" title="3 为什么三次握手、四次挥手？"></a>3 为什么三次握手、四次挥手？</h4><ul>
 <li>三次握手：三次握手可以防止已经失效的请求连接的报文突然有传输到服务器端导致服务器资源的浪费。</li>
 <li>四次挥手：由于Server收到ClientFIN报文的时候可能还有数据需要传送，因此先发送ACK报文告知Client请求收到，等待Server发送完数据，就可以像Client发送FIN报文告知数据发送完毕</li>
 </ul>
-<h3 id="TCP的滑动窗口、流量控制和拥塞控制，快重传和快恢复，超时重传"><a href="#TCP的滑动窗口、流量控制和拥塞控制，快重传和快恢复，超时重传" class="headerlink" title="TCP的滑动窗口、流量控制和拥塞控制，快重传和快恢复，超时重传"></a>TCP的滑动窗口、流量控制和拥塞控制，快重传和快恢复，超时重传</h3><ul>
+<h4 id="4-TCP的滑动窗口、流量控制和拥塞控制，快重传和快恢复，超时重传"><a href="#4-TCP的滑动窗口、流量控制和拥塞控制，快重传和快恢复，超时重传" class="headerlink" title="4 TCP的滑动窗口、流量控制和拥塞控制，快重传和快恢复，超时重传"></a>4 TCP的滑动窗口、流量控制和拥塞控制，快重传和快恢复，超时重传</h4><ul>
 <li><p>滑动窗口协议</p>
 <ul>
 <li>窗口：发送者可以连续发送一段字节序列而不需等待接受者的应答，这段连续序列的长度称为窗口</li>
@@ -315,7 +309,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="OSI七层模型和TCP-IP四层模型"><a href="#OSI七层模型和TCP-IP四层模型" class="headerlink" title="OSI七层模型和TCP/IP四层模型"></a>OSI七层模型和TCP/IP四层模型</h3><ul>
+<h4 id="5-OSI七层模型和TCP-IP四层模型"><a href="#5-OSI七层模型和TCP-IP四层模型" class="headerlink" title="5 OSI七层模型和TCP/IP四层模型"></a>5 OSI七层模型和TCP/IP四层模型</h4><ul>
 <li><p>OSI七层模型</p>
 <ul>
 <li>物理层：主要协议IEEE802.3、RJ45等</li>
@@ -336,7 +330,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="TCP与UDP的区别"><a href="#TCP与UDP的区别" class="headerlink" title="TCP与UDP的区别"></a>TCP与UDP的区别</h3><ul>
+<h4 id="6-TCP与UDP的区别"><a href="#6-TCP与UDP的区别" class="headerlink" title="6 TCP与UDP的区别"></a>6 TCP与UDP的区别</h4><ul>
 <li>TCP是面向连接的、可靠的，而UDP是非面向连接、不可靠的</li>
 <li>TCP一对一，UDP支持一对一，一对多，多对一，多对多</li>
 <li>TCP具有拥塞控制与流量控制而UDP没有</li>
@@ -345,7 +339,7 @@
 <li>TCP注重安全性，而UDP数据传输快</li>
 <li>用TCP的协议：FTP、Telnet、SMTP、POP3、HTTP(s)，用UDP的协议：DNS、SNMP、TFTP</li>
 </ul>
-<h3 id="HTTP与HTTPS的区别"><a href="#HTTP与HTTPS的区别" class="headerlink" title="HTTP与HTTPS的区别"></a>HTTP与HTTPS的区别</h3><ul>
+<h4 id="7-HTTP与HTTPS的区别"><a href="#7-HTTP与HTTPS的区别" class="headerlink" title="7 HTTP与HTTPS的区别"></a>7 HTTP与HTTPS的区别</h4><ul>
 <li><p>区别如下：</p>
 <ol>
 <li>HTTP协议传输的数据是以明文方式，而HTTPS协议传输的数据则是经过TLS加密的</li>
@@ -369,19 +363,19 @@
 </ul>
 </li>
 </ul>
-<h3 id="浏览器中输入URL后会发生什么"><a href="#浏览器中输入URL后会发生什么" class="headerlink" title="浏览器中输入URL后会发生什么"></a>浏览器中输入URL后会发生什么</h3><ol>
+<h4 id="8浏览器中输入URL后会发生什么"><a href="#8浏览器中输入URL后会发生什么" class="headerlink" title="8浏览器中输入URL后会发生什么"></a>8浏览器中输入URL后会发生什么</h4><ol>
 <li>域名解析获得IP地址：用到DNS、UDP协议</li>
 <li>建立http连接：用到http协议</li>
 <li>生成get请求报文：生成后交给TCP层处理，用到TCP与IP协议</li>
 </ol>
-<h3 id="HTTP请求步骤"><a href="#HTTP请求步骤" class="headerlink" title="HTTP请求步骤"></a>HTTP请求步骤</h3><ol>
+<h4 id="9-HTTP请求步骤"><a href="#9-HTTP请求步骤" class="headerlink" title="9 HTTP请求步骤"></a>9 HTTP请求步骤</h4><ol>
 <li>客户端连接到web服务器</li>
 <li>发送http客户请求</li>
 <li>服务器接受请求并返回http响应</li>
 <li>释放TCP连接</li>
 <li>客户端浏览器解析html内容</li>
 </ol>
-<h3 id="socket编程中服务器端和客户端主要用到哪些函数"><a href="#socket编程中服务器端和客户端主要用到哪些函数" class="headerlink" title="socket编程中服务器端和客户端主要用到哪些函数"></a>socket编程中服务器端和客户端主要用到哪些函数</h3><ul>
+<h4 id="10-socket编程中服务器端和客户端主要用到哪些函数"><a href="#10-socket编程中服务器端和客户端主要用到哪些函数" class="headerlink" title="10 socket编程中服务器端和客户端主要用到哪些函数"></a>10 socket编程中服务器端和客户端主要用到哪些函数</h4><ul>
 <li><p>基于TCP的socket</p>
 <ul>
 <li>Server<ol>
@@ -429,7 +423,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="Post与Get的区别"><a href="#Post与Get的区别" class="headerlink" title="Post与Get的区别"></a>Post与Get的区别</h3><ul>
+<h4 id="11-Post与Get的区别"><a href="#11-Post与Get的区别" class="headerlink" title="11 Post与Get的区别"></a>11 Post与Get的区别</h4><ul>
 <li>表面区别</li>
 </ul>
 <table>
@@ -494,25 +488,22 @@
 </li>
 </ul>
 <p>参考：<br>[1] <a href="https://www.cnblogs.com/logsharing/p/8448446.html" target="_blank" rel="noopener">https://www.cnblogs.com/logsharing/p/8448446.html</a><br>[2] <a href="https://baijiahao.baidu.com/s?id=1626599028653203490&amp;wfr=spider&amp;for=pc" target="_blank" rel="noopener">https://baijiahao.baidu.com/s?id=1626599028653203490&amp;wfr=spider&amp;for=pc</a></p>
-<h3 id="HTTP请求头部"><a href="#HTTP请求头部" class="headerlink" title="HTTP请求头部"></a>HTTP请求头部</h3><ul>
-<li><p>请求行</p>
-<ul>
+<h4 id="12-HTTP请求头部"><a href="#12-HTTP请求头部" class="headerlink" title="12 HTTP请求头部"></a>12 HTTP请求头部</h4><ul>
+<li>请求行<ul>
 <li>请求方法</li>
 <li>请求URL</li>
 <li>HTTP协议及版本</li>
 </ul>
 </li>
-<li><p>报文头</p>
-</li>
-<li><p>报文体</p>
-<h3 id="指针常量与常量指针"><a href="#指针常量与常量指针" class="headerlink" title="指针常量与常量指针"></a>指针常量与常量指针</h3><p>区别：*在前在是指针常量，const在前则是常量指针</p>
-</li>
-<li><p>指针常量：不能改变指针的指向，int* const p = &a;</p>
-</li>
-<li><p>常量指针：不能改变指针指向的值， const int *p;</p>
-</li>
+<li>报文头</li>
+<li>报文体</li>
 </ul>
-<h3 id="C-内存布局（从高到低的顺序）以及为什么这么布局？"><a href="#C-内存布局（从高到低的顺序）以及为什么这么布局？" class="headerlink" title="C++内存布局（从高到低的顺序）以及为什么这么布局？"></a>C++内存布局（从高到低的顺序）以及为什么这么布局？</h3><ul>
+<h4 id="12-指针常量与常量指针"><a href="#12-指针常量与常量指针" class="headerlink" title="12 指针常量与常量指针"></a>12 指针常量与常量指针</h4><p>区别：*在前在是指针常量，const在前则是常量指针</p>
+<ul>
+<li>指针常量：不能改变指针的指向，int* const p = &a;</li>
+<li>常量指针：不能改变指针指向的值， const int *p;</li>
+</ul>
+<h4 id="12-C-内存布局（从高到低的顺序）以及为什么这么布局？"><a href="#12-C-内存布局（从高到低的顺序）以及为什么这么布局？" class="headerlink" title="12 C++内存布局（从高到低的顺序）以及为什么这么布局？"></a>12 C++内存布局（从高到低的顺序）以及为什么这么布局？</h4><ul>
 <li>内核空间（1G）</li>
 <li>栈（向下增长）：局部变量</li>
 <li>内存映射段：存放静态库、动态库以及文件映射等</li>
@@ -528,19 +519,19 @@
 </ul>
 </li>
 </ul>
-<h3 id="Linux-C-调试工具"><a href="#Linux-C-调试工具" class="headerlink" title="Linux C++调试工具"></a>Linux C++调试工具</h3><p><a href="https://www.cnblogs.com/lidabo/p/4377545.html" target="_blank" rel="noopener">https://www.cnblogs.com/lidabo/p/4377545.html</a></p>
-<h3 id="为什么构造函数不可以是虚函数？"><a href="#为什么构造函数不可以是虚函数？" class="headerlink" title="为什么构造函数不可以是虚函数？"></a>为什么构造函数不可以是虚函数？</h3><ul>
+<h4 id="13-Linux-C-调试工具"><a href="#13-Linux-C-调试工具" class="headerlink" title="13 Linux C++调试工具"></a>13 Linux C++调试工具</h4><p><a href="https://www.cnblogs.com/lidabo/p/4377545.html" target="_blank" rel="noopener">https://www.cnblogs.com/lidabo/p/4377545.html</a></p>
+<h4 id="14-为什么构造函数不可以是虚函数？"><a href="#14-为什么构造函数不可以是虚函数？" class="headerlink" title="14 为什么构造函数不可以是虚函数？"></a>14 为什么构造函数不可以是虚函数？</h4><ul>
 <li>构造函数不需要是虚函数，也不允许是虚函数。因为当创建一个对象时，我们总是要明确指定对象的类型，尽管我们可能通过基类的指针或引用去访问它。</li>
 <li>从实现的角度看。虚函数表总是在构造函数调用之后才建立，因而构造函数不可能成为虚函数。</li>
 </ul>
-<h3 id="红黑树的特点"><a href="#红黑树的特点" class="headerlink" title="红黑树的特点"></a>红黑树的特点</h3><ol>
+<h4 id="15-红黑树的特点"><a href="#15-红黑树的特点" class="headerlink" title="15 红黑树的特点"></a>15 红黑树的特点</h4><ol>
 <li>每个节点要么是红的，要么是黑的；</li>
 <li>根节点是黑的；</li>
 <li>每个叶节点都是黑的；</li>
 <li>如果一个节点是红的，那么它的两个子节点都是黑的；</li>
 <li>对于任意一个节点而言，其到叶节点尾端NULL指针的每条路径都经过相同数目的黑节点。</li>
 </ol>
-<h3 id="AVL树和红黑树的定义与区别"><a href="#AVL树和红黑树的定义与区别" class="headerlink" title="AVL树和红黑树的定义与区别"></a>AVL树和红黑树的定义与区别</h3><ul>
+<h4 id="16-AVL树和红黑树的定义与区别"><a href="#16-AVL树和红黑树的定义与区别" class="headerlink" title="16 AVL树和红黑树的定义与区别"></a>16 AVL树和红黑树的定义与区别</h4><ul>
 <li>AVL树：AVL（平衡二叉树），是一种特殊的排序二叉树，其左右子树也是平衡二叉树，且左右子树高度差的绝对值不大于1。</li>
 <li>红黑树：红黑树是一种二叉查找树，但在每个节点增加了一个存储位表示节点的颜色，非红即黑。通过对任何一条根到叶子的路径上各个节点着色的方式的限制，红黑树确保没有一条路径会比其他路径长2倍。故，红黑树是一种弱平衡二叉树。红黑树有以下5个特点：<ol>
 <li>每个节点要么是红的，要么是黑的；</li>
@@ -552,7 +543,7 @@
 </li>
 <li>区别：AVL树是高度平衡的，频繁的插入和删除，会引起频繁的rebalance，导致效率下降；红黑树不是高度平衡的，算是一种折中，插入最多2次旋转，删除最多3次旋转。</li>
 </ul>
-<h3 id="B-树与B-树的定义"><a href="#B-树与B-树的定义" class="headerlink" title="B-树与B+树的定义"></a>B-树与B+树的定义</h3><ul>
+<h4 id="17-B-树与B-树的定义"><a href="#17-B-树与B-树的定义" class="headerlink" title="17 B-树与B+树的定义"></a>17 B-树与B+树的定义</h4><ul>
 <li>B树：一颗m阶B树定义如下<ul>
 <li>每个节点最多有m-1个关键字</li>
 <li>根节点最少可以只有1个关键字</li>
@@ -570,13 +561,13 @@
 </ul>
 </li>
 </ul>
-<h3 id="堆与栈的区别"><a href="#堆与栈的区别" class="headerlink" title="堆与栈的区别"></a>堆与栈的区别</h3><ul>
+<h4 id="18-堆与栈的区别"><a href="#18-堆与栈的区别" class="headerlink" title="18 堆与栈的区别"></a>18 堆与栈的区别</h4><ul>
 <li>堆是有低地址向高地址扩展，而栈是高地址向低地址扩展</li>
 <li>堆中的内存需要手动的申请与释放，而栈中的地址是由OS自动的申请和释放的</li>
 <li>堆中频繁的调用malloc和free会产生内存碎片，而栈不会</li>
 <li>堆的分配效率低，而栈的分配效率高</li>
 </ul>
-<h3 id="常见排序算法总结"><a href="#常见排序算法总结" class="headerlink" title="常见排序算法总结"></a>常见排序算法总结</h3><table>
+<h4 id="19-常见排序算法总结"><a href="#19-常见排序算法总结" class="headerlink" title="19 常见排序算法总结"></a>19 常见排序算法总结</h4><table>
 <thead>
 <tr>
 <th>算法</th>
@@ -644,7 +635,7 @@
 <td align="right">不稳定</td>
 </tr>
 </tbody></table>
-<h3 id="常用设计模式"><a href="#常用设计模式" class="headerlink" title="常用设计模式"></a>常用设计模式</h3><ul>
+<h4 id="20-常用设计模式"><a href="#20-常用设计模式" class="headerlink" title="20 常用设计模式"></a>20 常用设计模式</h4><ul>
 <li><p>单例模式：主要解决全局使用的类频繁的创建和销毁的问题。单例模式下可以确保一个类只有一个实例，而且自行化实例并向整个系统提供这个实例。</p>
 <ul>
 <li>多线程安全问题<ul>
@@ -661,14 +652,14 @@
 <li><p>装饰器模式：对已经存在的某些类进行装饰，以拓展一些功能，从而动态的为一个对象增加新的功能。</p>
 </li>
 </ul>
-<h3 id="OOP设计模式五大原则"><a href="#OOP设计模式五大原则" class="headerlink" title="OOP设计模式五大原则"></a>OOP设计模式五大原则</h3><ul>
+<h4 id="21-OOP设计模式五大原则"><a href="#21-OOP设计模式五大原则" class="headerlink" title="21 OOP设计模式五大原则"></a>21 OOP设计模式五大原则</h4><ul>
 <li>单一职责：避免相同的职责分配到不同的类中；避免一个类承担太多职责</li>
 <li>接口隔离：客户端不应实现一些它们不会使用的接口</li>
 <li>开放-封闭：在扩展性方面是开放的而在更改性方面是封闭的</li>
 <li>替换：子类型必须能替换掉它们的父类、并且出现在父类出现的任何地方</li>
 <li>依赖倒置：上层模块不应该依赖于下层模块</li>
 </ul>
-<h3 id="手写Singleton模式"><a href="#手写Singleton模式" class="headerlink" title="手写Singleton模式"></a>手写Singleton模式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">template&lt;typename T&gt; </span><br><span class="line">class Singleton &#123;</span><br><span class="line">public:</span><br><span class="line">    Singleton(const Singleton&amp; ) &#x3D; delete;</span><br><span class="line">    Singleton&amp; operator&#x3D;(const Singleton&amp; ) &#x3D; delete;</span><br><span class="line">    static T* getInstance() &#123;</span><br><span class="line">        pthread_mutex_lock(&amp;mutex);</span><br><span class="line">        if (uniqueInstance &#x3D;&#x3D; nullptr) &#123;</span><br><span class="line">            uniqueInstance &#x3D; new T();</span><br><span class="line">        &#125;</span><br><span class="line">        pthread_mutex_unlock(&amp;mutex);</span><br><span class="line">        return uniqueInstance;</span><br><span class="line">    &#125;</span><br><span class="line">private:</span><br><span class="line">    static T* uniqueInstance;</span><br><span class="line">    static pthread_mutex_t mutex;</span><br><span class="line">    Singleton() &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">template&lt;typename T&gt; </span><br><span class="line">pthread_mutex_t Singleton&lt;T&gt;::mutex &#x3D; PTHREAD_MUTEX_INITIALIZER;</span><br><span class="line"></span><br><span class="line">template&lt;typename T&gt; </span><br><span class="line">T* Singleton&lt;T&gt;::uniqueInstance &#x3D; nullptr;</span><br></pre></td></tr></table></figure>
+<h4 id="22-手写Singleton模式"><a href="#22-手写Singleton模式" class="headerlink" title="22 手写Singleton模式"></a>22 手写Singleton模式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">template&lt;typename T&gt; </span><br><span class="line">class Singleton &#123;</span><br><span class="line">public:</span><br><span class="line">    Singleton(const Singleton&amp; ) &#x3D; delete;</span><br><span class="line">    Singleton&amp; operator&#x3D;(const Singleton&amp; ) &#x3D; delete;</span><br><span class="line">    static T* getInstance() &#123;</span><br><span class="line">        pthread_mutex_lock(&amp;mutex);</span><br><span class="line">        if (uniqueInstance &#x3D;&#x3D; nullptr) &#123;</span><br><span class="line">            uniqueInstance &#x3D; new T();</span><br><span class="line">        &#125;</span><br><span class="line">        pthread_mutex_unlock(&amp;mutex);</span><br><span class="line">        return uniqueInstance;</span><br><span class="line">    &#125;</span><br><span class="line">private:</span><br><span class="line">    static T* uniqueInstance;</span><br><span class="line">    static pthread_mutex_t mutex;</span><br><span class="line">    Singleton() &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">template&lt;typename T&gt; </span><br><span class="line">pthread_mutex_t Singleton&lt;T&gt;::mutex &#x3D; PTHREAD_MUTEX_INITIALIZER;</span><br><span class="line"></span><br><span class="line">template&lt;typename T&gt; </span><br><span class="line">T* Singleton&lt;T&gt;::uniqueInstance &#x3D; nullptr;</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -755,7 +746,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP三次握手与四次挥手"><span class="nav-number">1.</span> <span class="nav-text">TCP三次握手与四次挥手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#挥手与握手过程中Client与Server的状态变化"><span class="nav-number">2.</span> <span class="nav-text">挥手与握手过程中Client与Server的状态变化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么三次握手、四次挥手？"><span class="nav-number">3.</span> <span class="nav-text">为什么三次握手、四次挥手？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP的滑动窗口、流量控制和拥塞控制，快重传和快恢复，超时重传"><span class="nav-number">4.</span> <span class="nav-text">TCP的滑动窗口、流量控制和拥塞控制，快重传和快恢复，超时重传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OSI七层模型和TCP-IP四层模型"><span class="nav-number">5.</span> <span class="nav-text">OSI七层模型和TCP&#x2F;IP四层模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP与UDP的区别"><span class="nav-number">6.</span> <span class="nav-text">TCP与UDP的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP与HTTPS的区别"><span class="nav-number">7.</span> <span class="nav-text">HTTP与HTTPS的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器中输入URL后会发生什么"><span class="nav-number">8.</span> <span class="nav-text">浏览器中输入URL后会发生什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP请求步骤"><span class="nav-number">9.</span> <span class="nav-text">HTTP请求步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#socket编程中服务器端和客户端主要用到哪些函数"><span class="nav-number">10.</span> <span class="nav-text">socket编程中服务器端和客户端主要用到哪些函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Post与Get的区别"><span class="nav-number">11.</span> <span class="nav-text">Post与Get的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP请求头部"><span class="nav-number">12.</span> <span class="nav-text">HTTP请求头部</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针常量与常量指针"><span class="nav-number">13.</span> <span class="nav-text">指针常量与常量指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-内存布局（从高到低的顺序）以及为什么这么布局？"><span class="nav-number">14.</span> <span class="nav-text">C++内存布局（从高到低的顺序）以及为什么这么布局？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-C-调试工具"><span class="nav-number">15.</span> <span class="nav-text">Linux C++调试工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么构造函数不可以是虚函数？"><span class="nav-number">16.</span> <span class="nav-text">为什么构造函数不可以是虚函数？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#红黑树的特点"><span class="nav-number">17.</span> <span class="nav-text">红黑树的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AVL树和红黑树的定义与区别"><span class="nav-number">18.</span> <span class="nav-text">AVL树和红黑树的定义与区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-树与B-树的定义"><span class="nav-number">19.</span> <span class="nav-text">B-树与B+树的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆与栈的区别"><span class="nav-number">20.</span> <span class="nav-text">堆与栈的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见排序算法总结"><span class="nav-number">21.</span> <span class="nav-text">常见排序算法总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用设计模式"><span class="nav-number">22.</span> <span class="nav-text">常用设计模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OOP设计模式五大原则"><span class="nav-number">23.</span> <span class="nav-text">OOP设计模式五大原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#手写Singleton模式"><span class="nav-number">24.</span> <span class="nav-text">手写Singleton模式</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-TCP三次握手与四次挥手"><span class="nav-number">1.</span> <span class="nav-text">1 TCP三次握手与四次挥手</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#三次握手"><span class="nav-number">1.1.</span> <span class="nav-text">三次握手</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#四次挥手"><span class="nav-number">1.2.</span> <span class="nav-text">四次挥手</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-挥手与握手过程中Client与Server的状态变化"><span class="nav-number">2.</span> <span class="nav-text">2 挥手与握手过程中Client与Server的状态变化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-为什么三次握手、四次挥手？"><span class="nav-number">3.</span> <span class="nav-text">3 为什么三次握手、四次挥手？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-TCP的滑动窗口、流量控制和拥塞控制，快重传和快恢复，超时重传"><span class="nav-number">4.</span> <span class="nav-text">4 TCP的滑动窗口、流量控制和拥塞控制，快重传和快恢复，超时重传</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-OSI七层模型和TCP-IP四层模型"><span class="nav-number">5.</span> <span class="nav-text">5 OSI七层模型和TCP&#x2F;IP四层模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-TCP与UDP的区别"><span class="nav-number">6.</span> <span class="nav-text">6 TCP与UDP的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-HTTP与HTTPS的区别"><span class="nav-number">7.</span> <span class="nav-text">7 HTTP与HTTPS的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8浏览器中输入URL后会发生什么"><span class="nav-number">8.</span> <span class="nav-text">8浏览器中输入URL后会发生什么</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-HTTP请求步骤"><span class="nav-number">9.</span> <span class="nav-text">9 HTTP请求步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-socket编程中服务器端和客户端主要用到哪些函数"><span class="nav-number">10.</span> <span class="nav-text">10 socket编程中服务器端和客户端主要用到哪些函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-Post与Get的区别"><span class="nav-number">11.</span> <span class="nav-text">11 Post与Get的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-HTTP请求头部"><span class="nav-number">12.</span> <span class="nav-text">12 HTTP请求头部</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-指针常量与常量指针"><span class="nav-number">13.</span> <span class="nav-text">12 指针常量与常量指针</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-C-内存布局（从高到低的顺序）以及为什么这么布局？"><span class="nav-number">14.</span> <span class="nav-text">12 C++内存布局（从高到低的顺序）以及为什么这么布局？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-Linux-C-调试工具"><span class="nav-number">15.</span> <span class="nav-text">13 Linux C++调试工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#14-为什么构造函数不可以是虚函数？"><span class="nav-number">16.</span> <span class="nav-text">14 为什么构造函数不可以是虚函数？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#15-红黑树的特点"><span class="nav-number">17.</span> <span class="nav-text">15 红黑树的特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#16-AVL树和红黑树的定义与区别"><span class="nav-number">18.</span> <span class="nav-text">16 AVL树和红黑树的定义与区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#17-B-树与B-树的定义"><span class="nav-number">19.</span> <span class="nav-text">17 B-树与B+树的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#18-堆与栈的区别"><span class="nav-number">20.</span> <span class="nav-text">18 堆与栈的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#19-常见排序算法总结"><span class="nav-number">21.</span> <span class="nav-text">19 常见排序算法总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#20-常用设计模式"><span class="nav-number">22.</span> <span class="nav-text">20 常用设计模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#21-OOP设计模式五大原则"><span class="nav-number">23.</span> <span class="nav-text">21 OOP设计模式五大原则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#22-手写Singleton模式"><span class="nav-number">24.</span> <span class="nav-text">22 手写Singleton模式</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -771,20 +762,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -817,7 +808,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -826,12 +817,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">9k</span>
+    <span title="站点总字数">16k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">9 分钟</span>
+    <span title="站点阅读时长">15 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.1.1
   </div>

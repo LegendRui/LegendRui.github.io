@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="google-site-verification" content="dPc7V7hFlDPAwD4iBS0ZLcd3TgbQV9up-OSqGM3-ezo" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://legendrui.github.io').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"order":-2}},"activeClass":"gitalk"},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="1 open函数open函数有2个原型，一为接受两个参数，一为接受三个参数。 1.1 原型一：接受两个参数1int open(char *pathname, int flags) 参数 pathname：文件路径名 flags：文件打开方式，可以是O_RDONLY | O_WRONLY | O_RDWR、O_CREAT | O_APPEND | O_TRUNC | O_EXCL | O_NONBL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux下文件的读写操作">
+<meta property="og:url" content="https:&#x2F;&#x2F;legendrui.github.io&#x2F;2020&#x2F;01&#x2F;05&#x2F;linux%E4%B8%8B%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%BB%E5%86%99%E6%93%8D%E4%BD%9C&#x2F;index.html">
+<meta property="og:site_name" content="Mistery&#39;s Blog">
+<meta property="og:description" content="1 open函数open函数有2个原型，一为接受两个参数，一为接受三个参数。 1.1 原型一：接受两个参数1int open(char *pathname, int flags) 参数 pathname：文件路径名 flags：文件打开方式，可以是O_RDONLY | O_WRONLY | O_RDWR、O_CREAT | O_APPEND | O_TRUNC | O_EXCL | O_NONBL">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-01-05T06:29:46.000Z">
+<meta property="article:modified_time" content="2020-08-23T12:50:22.315Z">
+<meta property="article:author" content="Mistery">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://legendrui.github.io/2020/01/05/linux%E4%B8%8B%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%BB%E5%86%99%E6%93%8D%E4%BD%9C/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>linux下文件的读写操作 | Mistery's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta custom-logo">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mistery's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">好记性不如烂博客</p>
+      <a>
+        <img class="custom-logo-image" src="http://www.acgrenwu.com/uploads/allimg/170821/1-1FR11FRK10.jpg" alt="Mistery's Blog">
+      </a>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/LegendRui" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://legendrui.github.io/2020/01/05/linux%E4%B8%8B%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%BB%E5%86%99%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://www.acgrenwu.com/uploads/allimg/170821/1-1FR11FRK10.jpg">
+      <meta itemprop="name" content="Mistery">
+      <meta itemprop="description" content="Nice to meet you!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mistery's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          linux下文件的读写操作
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-01-05 14:29:46" itemprop="dateCreated datePublished" datetime="2020-01-05T14:29:46+08:00">2020-01-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-23 20:50:22" itemprop="dateModified" datetime="2020-08-23T20:50:22+08:00">2020-08-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="1-open函数"><a href="#1-open函数" class="headerlink" title="1 open函数"></a>1 open函数</h4><p>open函数有2个原型，一为接受两个参数，一为接受三个参数。</p>
+<h5 id="1-1-原型一：接受两个参数"><a href="#1-1-原型一：接受两个参数" class="headerlink" title="1.1 原型一：接受两个参数"></a>1.1 原型一：接受两个参数</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int open(char *pathname, int flags)</span><br></pre></td></tr></table></figure>
+<h6 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h6><ul>
+<li>pathname：文件路径名</li>
+<li>flags：文件打开方式，可以是O_RDONLY | O_WRONLY | O_RDWR、O_CREAT | O_APPEND | O_TRUNC | O_EXCL | O_NONBLOCK</li>
+</ul>
+<h6 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h6><ul>
+<li>成功：返回打开文件得到的文件描述符</li>
+<li>失败：-1，并设置error</li>
+</ul>
+<h5 id="1-2-原型二：接受三个参数"><a href="#1-2-原型二：接受三个参数" class="headerlink" title="1.2 原型二：接受三个参数"></a>1.2 原型二：接受三个参数</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int open(char *pathname, int flags)</span><br></pre></td></tr></table></figure>
+<h6 id="参数-1"><a href="#参数-1" class="headerlink" title="参数"></a>参数</h6><ul>
+<li>pathname：文件路径名</li>
+<li>flags：文件打开方式，可以是O_RDONLY | O_WRONLY | O_RDWR、O_CREAT | O_APPEND | O_TRUNC | O_EXCL | O_NONBLOCK</li>
+<li>mode：当flags设置为O_CREAT时，才可设置mode。mode的取值为8进制数，用来描述文件的访问权限。例如：0664代表rw-rw-r–权限。</li>
+</ul>
+<h6 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a>返回值</h6><ul>
+<li>成功：返回打开文件得到的文件描述符</li>
+<li>失败：-1，并设置error</li>
+</ul>
+<h4 id="2-close函数"><a href="#2-close函数" class="headerlink" title="2 close函数"></a>2 close函数</h4><h5 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int close(int fd);</span><br></pre></td></tr></table></figure>
+
+<h5 id="参数-2"><a href="#参数-2" class="headerlink" title="参数"></a>参数</h5><ul>
+<li>fd：关闭文件的文件描述符</li>
+</ul>
+<h5 id="返回值-2"><a href="#返回值-2" class="headerlink" title="返回值"></a>返回值</h5><p>+0：成功<br>+-1：失败</p>
+<h4 id="3-read函数"><a href="#3-read函数" class="headerlink" title="3 read函数"></a>3 read函数</h4><h5 id="原型-1"><a href="#原型-1" class="headerlink" title="原型"></a>原型</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssize_t read(int fd, void *buf, size_t count)</span><br></pre></td></tr></table></figure>
+<h5 id="参数-3"><a href="#参数-3" class="headerlink" title="参数"></a>参数</h5><ul>
+<li>fd：文件描述符</li>
+<li>buf：存数据的缓冲区</li>
+<li>count：缓冲区大小</li>
+</ul>
+<h5 id="返回值-3"><a href="#返回值-3" class="headerlink" title="返回值"></a>返回值</h5><ul>
+<li>成功：读到的字节数</li>
+<li>失败：-1，并设置error</li>
+<li>-1：</li>
+</ul>
+<h4 id="4-write函数"><a href="#4-write函数" class="headerlink" title="4 write函数"></a>4 write函数</h4><h5 id="原型-2"><a href="#原型-2" class="headerlink" title="原型"></a>原型</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssize_t read(int fd, const void *buf, size_t count)</span><br></pre></td></tr></table></figure>
+<h5 id="参数-4"><a href="#参数-4" class="headerlink" title="参数"></a>参数</h5><ul>
+<li>fd：文件描述符</li>
+<li>buf：待写出的数据的缓冲区</li>
+<li>count：写出的字节数</li>
+</ul>
+<h5 id="返回值-4"><a href="#返回值-4" class="headerlink" title="返回值"></a>返回值</h5><ul>
+<li>成功：写入的字节数</li>
+<li>失败：-1，并设置error</li>
+</ul>
+<p><strong>例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;fcntl.h&gt;</span><br><span class="line">#include &lt;errno.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int fd &#x3D; 0;</span><br><span class="line">    char buf[1024];</span><br><span class="line">    int n;</span><br><span class="line">    fd &#x3D; open(&quot;&#x2F;dev&#x2F;tty&quot;, O_RDONLY | O_NONBLOCK);</span><br><span class="line">    if (fd &lt; 0) &#123;</span><br><span class="line">        perror(&quot;open &#x2F;dev&#x2F;tty&quot;);</span><br><span class="line">        exit(1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">tryagain:</span><br><span class="line">    n &#x3D; read(fd, buf, 10);</span><br><span class="line">    if (n &lt; 0) &#123;</span><br><span class="line">        if (errno !&#x3D; EAGAIN) &#123;</span><br><span class="line">            perror(&quot;read &#x2F;dev&#x2F;tty&quot;);</span><br><span class="line">            exit(1);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">        write(STDOUT_FILENO, &quot;try again\n&quot;, strlen(&quot;try again\n&quot;));</span><br><span class="line">        sleep(2);</span><br><span class="line">        goto tryagain;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; </span><br><span class="line">    write(STDOUT_FILENO, buf, n);</span><br><span class="line">    close(fd);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注：</strong>读网络文件和设备文件时，读普通文件不会产生阻塞。阻塞和非阻塞时文件的属性，而不是read/write函数的属性。</p>
+<h4 id="5-fcntl函数"><a href="#5-fcntl函数" class="headerlink" title="5 fcntl函数"></a>5 fcntl函数</h4><p>可以在不重新打开文件的情况下，修改文件的属性。</p>
+<h5 id="原型-3"><a href="#原型-3" class="headerlink" title="原型"></a>原型</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int fcntl(int fd, int cmd, ... &#x2F;* arg *&#x2F;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="参数-5"><a href="#参数-5" class="headerlink" title="参数"></a>参数</h5><ul>
+<li>fd：文件描述符</li>
+<li>cmd：文件属性的控制命令<ul>
+<li>F_GETFL：获取文件属性</li>
+<li>F_SETFL：设置文件属性</li>
+</ul>
+</li>
+<li>arg：控制文件的属性</li>
+</ul>
+<p>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int flags &#x3D; fcntl(fd, F_GETFL);</span><br><span class="line">flags |&#x3D; O_NONBLOCK;</span><br><span class="line">fcntl(fd, F_SETFL, flags);</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-lseek函数"><a href="#6-lseek函数" class="headerlink" title="6 lseek函数"></a>6 lseek函数</h4><h5 id="原型-4"><a href="#原型-4" class="headerlink" title="原型"></a>原型</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">off_t lseek(int fd, off_t offset, int whence)</span><br></pre></td></tr></table></figure>
+
+<h5 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h5><p>可以通过<code>offset</code>参数重定位文件描述符<code>fd</code>所对应的文件的偏移量</p>
+<h5 id="参数-6"><a href="#参数-6" class="headerlink" title="参数"></a>参数</h5><ul>
+<li>fd：待操作文件的文件描述符</li>
+<li>offset：偏移量</li>
+<li>whence：起始偏移位置<ul>
+<li>SEEK_SET：定位为文件起始</li>
+<li>SEEK_CUR：定位为当前位置</li>
+<li>SEEK_END：定位为文件末尾</li>
+</ul>
+</li>
+</ul>
+<h5 id="返回值-5"><a href="#返回值-5" class="headerlink" title="返回值"></a>返回值</h5><p>成功：返回从文件起始开始的偏移值<br>失败：-1<br><strong>注：</strong>文件的读、写是用一个偏移量。</p>
+<p><strong>例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;fcntl.h&gt;</span><br><span class="line">#include &lt;errno.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int fd, n;</span><br><span class="line">    char *msg &#x3D; &quot;It&#39;s a test for lseek.\n&quot;;</span><br><span class="line">    char ch;</span><br><span class="line"></span><br><span class="line">    fd &#x3D; open(&quot;lseek.txt&quot;, O_RDWR | O_CREAT, 0664);</span><br><span class="line">    if (n &lt; 0) &#123;</span><br><span class="line">        perror(&quot;open lseek.txt error&quot;);</span><br><span class="line">        exit(1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    write(fd, msg, strlen(msg));</span><br><span class="line">    lseek(fd, 0, SEEK_SET);</span><br><span class="line"></span><br><span class="line">    while ((n &#x3D; read(fd, &amp;ch, 1))) &#123;</span><br><span class="line">        if (n &lt; 0) &#123;</span><br><span class="line">            perror(&quot;read error&quot;);</span><br><span class="line">            exit(1);</span><br><span class="line">        &#125;</span><br><span class="line">        write(STDOUT_FILENO, &amp;ch, n);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-stat函数"><a href="#7-stat函数" class="headerlink" title="7 stat函数"></a>7 stat函数</h4><h5 id="原型-5"><a href="#原型-5" class="headerlink" title="原型"></a>原型</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int stat(const char *path, struct stat* buf)</span><br></pre></td></tr></table></figure>
+
+<h5 id="参数-7"><a href="#参数-7" class="headerlink" title="参数"></a>参数</h5><ul>
+<li>path：文件路径</li>
+<li>buf：传出参数，存放文件属性的结构体</li>
+</ul>
+<h5 id="返回值-6"><a href="#返回值-6" class="headerlink" title="返回值"></a>返回值</h5><ul>
+<li>成功：0</li>
+<li>失败：-1，设置errno</li>
+</ul>
+<p><strong>例：</strong>查看文件大小。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;sys&#x2F;stat.h&gt;</span><br><span class="line"></span><br><span class="line">int main(int argc, char *argv[])</span><br><span class="line">&#123;</span><br><span class="line">	struct stat buf;</span><br><span class="line"></span><br><span class="line">	int ret &#x3D; stat(argv[1], &amp;buf);</span><br><span class="line">	if (ret &#x3D;&#x3D; -1) &#123;</span><br><span class="line">		perror(&quot;stat error&quot;);</span><br><span class="line">		exit(1);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	printf(&quot;file size: %d\n&quot;, buf.st_size);</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注：</strong>stat函数是可以穿透符号连接的（即，如果操查看的是软连接，得到的是软连接指向的文件是属性）。如果不想穿透符号连接，可以使用lstat函数。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"><i class="fa fa-tag"></i> linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/29/gdb%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7/" rel="prev" title="gdb调试工具">
+      <i class="fa fa-chevron-left"></i> gdb调试工具
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/01/05/Deepin%E4%B8%AD%E5%AE%89%E8%A3%85TeXLive-VSCode/" rel="next" title="Deepin中安装TeXLive+VSCode">
+      Deepin中安装TeXLive+VSCode <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-open函数"><span class="nav-number">1.</span> <span class="nav-text">1 open函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-原型一：接受两个参数"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 原型一：接受两个参数</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#参数"><span class="nav-number">1.1.1.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#返回值"><span class="nav-number">1.1.2.</span> <span class="nav-text">返回值</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-原型二：接受三个参数"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 原型二：接受三个参数</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#参数-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#返回值-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">返回值</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-close函数"><span class="nav-number">2.</span> <span class="nav-text">2 close函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#原型"><span class="nav-number">2.1.</span> <span class="nav-text">原型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#参数-2"><span class="nav-number">2.2.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#返回值-2"><span class="nav-number">2.3.</span> <span class="nav-text">返回值</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-read函数"><span class="nav-number">3.</span> <span class="nav-text">3 read函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#原型-1"><span class="nav-number">3.1.</span> <span class="nav-text">原型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#参数-3"><span class="nav-number">3.2.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#返回值-3"><span class="nav-number">3.3.</span> <span class="nav-text">返回值</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-write函数"><span class="nav-number">4.</span> <span class="nav-text">4 write函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#原型-2"><span class="nav-number">4.1.</span> <span class="nav-text">原型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#参数-4"><span class="nav-number">4.2.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#返回值-4"><span class="nav-number">4.3.</span> <span class="nav-text">返回值</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-fcntl函数"><span class="nav-number">5.</span> <span class="nav-text">5 fcntl函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#原型-3"><span class="nav-number">5.1.</span> <span class="nav-text">原型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#参数-5"><span class="nav-number">5.2.</span> <span class="nav-text">参数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-lseek函数"><span class="nav-number">6.</span> <span class="nav-text">6 lseek函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#原型-4"><span class="nav-number">6.1.</span> <span class="nav-text">原型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#功能"><span class="nav-number">6.2.</span> <span class="nav-text">功能</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#参数-6"><span class="nav-number">6.3.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#返回值-5"><span class="nav-number">6.4.</span> <span class="nav-text">返回值</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-stat函数"><span class="nav-number">7.</span> <span class="nav-text">7 stat函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#原型-5"><span class="nav-number">7.1.</span> <span class="nav-text">原型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#参数-7"><span class="nav-number">7.2.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#返回值-6"><span class="nav-number">7.3.</span> <span class="nav-text">返回值</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Mistery"
+      src="http://www.acgrenwu.com/uploads/allimg/170821/1-1FR11FRK10.jpg">
+  <p class="site-author-name" itemprop="name">Mistery</p>
+  <div class="site-description" itemprop="description">Nice to meet you!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/LegendRui" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;LegendRui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:mistery.zhang@gmail.com" title="E-Mail → mailto:mistery.zhang@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mistery</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">16k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.1.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '5da5a2e7cbc408a1f238',
+      clientSecret: '3025506b07be9ff5080724dd8b9d8829a051676d',
+      repo: 'LegendRui.github.io',
+      owner: 'LegendRui',
+      admin: ['LegendRui'],
+      id: '41e06ab618a17f2d89484292b00ea66f',
+        language: 'zh-CN',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+
+</body>
+</html>
