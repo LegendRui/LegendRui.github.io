@@ -2,93 +2,121 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://legendrui.github.io/2019/12/21/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8Bvim%E7%BC%96%E8%BE%91%E5%99%A8/</loc>
+    <loc>https://legendrui.github.io/tags/index.html</loc>
     
-    <lastmod>2019-12-28T05:10:33.851Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://legendrui.github.io/2019/12/18/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
-    
-    <lastmod>2019-12-28T05:10:33.850Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://legendrui.github.io/2019/12/26/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
-    
-    <lastmod>2019-12-26T07:11:28.984Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://legendrui.github.io/2019/12/25/Ubuntu%E4%B8%8B%E6%90%AD%E5%BB%BAftp%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
-    
-    <lastmod>2019-12-25T14:38:06.747Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://legendrui.github.io/2019/12/24/linux/</loc>
-    
-    <lastmod>2019-12-25T11:34:50.197Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://legendrui.github.io/google91a91a043cb68bb0.html</loc>
-    
-    <lastmod>2019-12-24T12:00:19.713Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://legendrui.github.io/2019/12/18/C-%E9%9D%A2%E8%AF%95%E9%A2%98/</loc>
-    
-    <lastmod>2019-12-24T11:25:49.899Z</lastmod>
+    <lastmod>2020-08-23T13:24:16.828Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://legendrui.github.io/sitemap/index.html</loc>
     
-    <lastmod>2019-12-21T06:43:36.126Z</lastmod>
+    <lastmod>2020-08-23T13:24:16.827Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://legendrui.github.io/schedule/index.html</loc>
     
-    <lastmod>2019-12-21T06:22:01.848Z</lastmod>
+    <lastmod>2020-08-23T13:24:16.826Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://legendrui.github.io/about/index.html</loc>
+    <loc>https://legendrui.github.io/google91a91a043cb68bb0.html</loc>
     
-    <lastmod>2019-12-21T06:20:53.228Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://legendrui.github.io/archives/index.html</loc>
-    
-    <lastmod>2019-12-21T06:16:30.250Z</lastmod>
+    <lastmod>2020-08-23T13:24:16.820Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://legendrui.github.io/categories/index.html</loc>
     
-    <lastmod>2019-12-21T06:14:20.882Z</lastmod>
+    <lastmod>2020-08-23T13:24:16.820Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://legendrui.github.io/tags/index.html</loc>
+    <loc>https://legendrui.github.io/archives/index.html</loc>
     
-    <lastmod>2019-12-21T06:11:56.583Z</lastmod>
+    <lastmod>2020-08-23T13:24:16.819Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://legendrui.github.io/about/index.html</loc>
+    
+    <lastmod>2020-08-23T13:24:16.818Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://legendrui.github.io/2020/01/05/linux%E4%B8%8B%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%BB%E5%86%99%E6%93%8D%E4%BD%9C/</loc>
+    
+    <lastmod>2020-08-23T13:24:16.817Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://legendrui.github.io/2019/12/24/linux/</loc>
+    
+    <lastmod>2020-08-23T13:24:16.816Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://legendrui.github.io/2019/12/29/gdb%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7/</loc>
+    
+    <lastmod>2020-08-23T13:24:16.815Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://legendrui.github.io/2020/01/05/feedbacks/</loc>
+    
+    <lastmod>2020-08-23T13:24:16.815Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://legendrui.github.io/2019/12/25/Ubuntu%E4%B8%8B%E6%90%AD%E5%BB%BAftp%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
+    
+    <lastmod>2020-08-23T13:24:16.814Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://legendrui.github.io/2019/12/18/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    
+    <lastmod>2020-08-23T13:24:16.813Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://legendrui.github.io/2019/12/21/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8Bvim%E7%BC%96%E8%BE%91%E5%99%A8/</loc>
+    
+    <lastmod>2020-08-23T13:24:16.813Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://legendrui.github.io/2019/12/26/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
+    
+    <lastmod>2020-08-23T13:24:16.812Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://legendrui.github.io/2020/01/05/Deepin%E4%B8%AD%E5%AE%89%E8%A3%85TeXLive-VSCode/</loc>
+    
+    <lastmod>2020-08-23T13:24:16.811Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://legendrui.github.io/2019/12/18/C-%E9%9D%A2%E8%AF%95%E9%A2%98/</loc>
+    
+    <lastmod>2020-08-23T13:24:16.811Z</lastmod>
     
   </url>
   
