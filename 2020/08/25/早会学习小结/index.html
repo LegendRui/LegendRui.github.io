@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="google-site-verification" content="dPc7V7hFlDPAwD4iBS0ZLcd3TgbQV9up-OSqGM3-ezo" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://legendrui.github.io').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"order":-2}},"activeClass":"gitalk"},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="早会学习小结物理广播信道加扰PBCH的比特块$b(0), \cdots, b(M_{bit} - 1)$通过以下算法加扰为加扰序列$\tilde b(0), \cdots, \tilde b(M_{bit} - 1)$：$$ \tilde b(i) &#x3D; (b(i) + c(i + vM_{bit})) % 2$$ 其中，c(i)是伪随机序列：$$\begin{aligned}c(n) &amp;&#x3D;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="早会学习小结">
+<meta property="og:url" content="https:&#x2F;&#x2F;legendrui.github.io&#x2F;2020&#x2F;08&#x2F;25&#x2F;%E6%97%A9%E4%BC%9A%E5%AD%A6%E4%B9%A0%E5%B0%8F%E7%BB%93&#x2F;index.html">
+<meta property="og:site_name" content="Mistery&#39;s Blog">
+<meta property="og:description" content="早会学习小结物理广播信道加扰PBCH的比特块$b(0), \cdots, b(M_{bit} - 1)$通过以下算法加扰为加扰序列$\tilde b(0), \cdots, \tilde b(M_{bit} - 1)$：$$ \tilde b(i) &#x3D; (b(i) + c(i + vM_{bit})) % 2$$ 其中，c(i)是伪随机序列：$$\begin{aligned}c(n) &amp;&#x3D;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-08-24T16:39:11.032Z">
+<meta property="article:modified_time" content="2020-08-24T17:07:06.537Z">
+<meta property="article:author" content="Mistery">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://legendrui.github.io/2020/08/25/%E6%97%A9%E4%BC%9A%E5%AD%A6%E4%B9%A0%E5%B0%8F%E7%BB%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>早会学习小结 | Mistery's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta custom-logo">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mistery's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">好记性不如烂博客</p>
+      <a>
+        <img class="custom-logo-image" src="http://www.acgrenwu.com/uploads/allimg/170821/1-1FR11FRK10.jpg" alt="Mistery's Blog">
+      </a>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/LegendRui" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://legendrui.github.io/2020/08/25/%E6%97%A9%E4%BC%9A%E5%AD%A6%E4%B9%A0%E5%B0%8F%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://www.acgrenwu.com/uploads/allimg/170821/1-1FR11FRK10.jpg">
+      <meta itemprop="name" content="Mistery">
+      <meta itemprop="description" content="Nice to meet you!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mistery's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          早会学习小结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-08-25 00:39:11 / 修改时间：01:07:06" itemprop="dateCreated datePublished" datetime="2020-08-25T00:39:11+08:00">2020-08-25</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="早会学习小结"><a href="#早会学习小结" class="headerlink" title="早会学习小结"></a>早会学习小结</h1><h3 id="物理广播信道"><a href="#物理广播信道" class="headerlink" title="物理广播信道"></a>物理广播信道</h3><h4 id="加扰"><a href="#加扰" class="headerlink" title="加扰"></a>加扰</h4><p>PBCH的比特块$b(0), \cdots, b(M_{bit} - 1)$通过以下算法加扰为加扰序列$\tilde b(0), \cdots, \tilde b(M_{bit} - 1)$：<br>$$ \tilde b(i) = (b(i) + c(i + vM_{bit})) % 2$$</p>
+<p>其中，c(i)是伪随机序列：<br>$$<br>\begin{aligned}<br>c(n) &amp;= (x_1(n + N_c) + x_2(n + N_c)) \text{mod} 2 \<br>x_1(n + 31) &amp;= (x_1(n + 3) + x_1(n)) \text{mod} 2 \<br>x_2(n + 31) &amp;= (x_2(n + 3) + x_2(n + 2) + x_2(n + 1) + x_2(n)) \text{mod} 2<br>\end{aligned}<br>$$</p>
+<p>加扰序列应在每个SS/PBCH块的起始处以$c_{init} = N_{ID}^{cell}$初始化：</p>
+<ul>
+<li>$L_{max} = 4$, $v$是SS/PBCH低2位</li>
+<li>$L_{max} = 8$ 或者64, $v$是SS/PBCH低3位<br>其中，$L_{max} $为给定的特定频带的SS/PBCH周期内SS/PBCH块的最大数目</li>
+</ul>
+<h4 id="调制"><a href="#调制" class="headerlink" title="调制"></a>调制</h4><p>加扰序列$\tilde b(0), \cdots, \tilde b(M_{bit} - 1)$通过QPSK调制为复数序列$ b_{\text{PBCH}}(0), \cdots, b_{\text{PBCH}}(M_{bit} - 1)$.</p>
+<p>QPSK调制算法为：<br>$$d(i) = \frac{1}{\sqrt 2}\left[ (1 - 2b(2i)) + j(1 - 2b(2i+1))\right]$$</p>
+<h4 id="映射到物理资源"><a href="#映射到物理资源" class="headerlink" title="映射到物理资源"></a>映射到物理资源</h4><p>调制序列$ b_{\text{PBCH}}(0), \cdots, b_{\text{PBCH}}(M_{bit} - 1)$以因子$\beta_{PBCH}$放缩以满足PBCH的功率分配。映射根据以下条件，将$d_{PBCH}(0)$映射为RE$(k,l)_{p,\mu}$：</p>
+<ul>
+<li>RE不是用于PBCH解调参考信号<br>非PBCH DM-RS预留RE$(k,l)_{p,\mu}的索引递增方式为先$k$后$l$，其中$k$和$l$分别表示一个SS/PBCH块内的频率和时间索引。</li>
+</ul>
+<p>38213-4.1节描述了UE在时域中监视可能的SS/PBCH块的位置。</p>
+<h2 id="物理信号"><a href="#物理信号" class="headerlink" title="物理信号"></a>物理信号</h2><p>物理信号包括参考信号（PDSCH 的DM-RS+PTRS，PDCCH的DM-RS，PBCH的解调参考信号，CSI）、同步信号（PSS/SSS）以及SS/PBCH传输块。</p>
+<h3 id="参考信号"><a href="#参考信号" class="headerlink" title="参考信号"></a>参考信号</h3><h4 id="PDSCH的解调参考信号"><a href="#PDSCH的解调参考信号" class="headerlink" title="PDSCH的解调参考信号"></a>PDSCH的解调参考信号</h4><h5 id="序列生成"><a href="#序列生成" class="headerlink" title="序列生成"></a>序列生成</h5><p>序列$r(n)$的定义为<br>$$r(n) = \frac{1}{\sqrt{2}}(1 - 2\cdot c(2n)) + j \frac{1}{\sqrt{2}}(1 - 2\cdot c(2n + 1))$$<br>序列$c(i)$是伪随机序列.</p>
+<p>伪随机序列生成器以下列方式初始化：<br>$$c_{init} = \left( 2^{17}(N_{symb}^{slot}n_{s,f}^{\mu} + l + 1)(2N_{ID}^{n_{SCID}} + 1) + 2N_{ID}^{n_{SCID}} + n_{SCID} \right) \text{mod} 2^{31}$$<br>其中， $l$是一个时隙内OFDM 符号的数目， $n_{s,f}^{\mu}$是一帧的slot数目，</p>
+<ul>
+<li>$N_{ID}^{0}, N_{ID}^{1} \in {0,1,\cdots, 65535}$是由DMRS-DownlinkConfig IE（如果提供）中的高层参数scramblingID0 和 scramblingID1指定的，并且PDSCH由PDCCH使用DCI格式1-1调度，其中CRC由C-RNTI、MCS-C-RNTI或CS-RNTI加扰</li>
+<li>$N_{ID}^{0} \in {0,1,\cdots, 65535}$是由DMRS-DownlinkConfig IE（如果提供）中的高层参数scramblingID0 指定的，并且PDSCH由PDCCH使用DCI格式1-0调度，其中CRC由C-RNTI、MCS-C-RNTI或CS-RNTI加扰</li>
+<li>其他情况下，$N_{ID}^{n_{SCID}} = N_{ID}^{cell}$</li>
+</ul>
+<p>如果使用DCI格式1-1，则$n_{SCID}\in{0,1}$是由与PDSCH传输相关的DCI中的DM-RS序列初始化字段指定定的，否则$n_{SCID} = 0$。</p>
+<h5 id="映射到物理资源-1"><a href="#映射到物理资源-1" class="headerlink" title="映射到物理资源"></a>映射到物理资源</h5><p>根据高层参数dmrs-Type（配置类型1或配置类型2），PDSCH的DM-RS被映射到物理资源上。<br>序列$r(m)$先通过因子$\beta_{PDSCH}^{DMRS}$放缩以满足协议的传输功率要求，再映射到RE$(k,l)<em>{p,\mu}$上：<br>$$<br>\begin{aligned}<br>a</em>{k,l}^{(p,\mu)} &amp;= \beta_{PDSCH}^{DMRS}w_f(k^{\prime})w_t(l^{\prime})r(2n + k^{\prime} ) \<br>k &amp;= \begin{cases}<br>4n + 2k^{\prime} + \Delta &amp; Type-1 \<br>6n + k^{\prime} + \Delta &amp; Type-2<br>\end{cases} \<br>k^{\prime} &amp;= 0,1 \<br>l &amp;= \bar l + l^{\prime} \<br>n &amp;= 0, 1, \cdots<br>\end{aligned}<br>$$<br>其中，$w_f(k^{\prime}),w_t(l^{\prime}),\Delta$通过查表获得。在映射过程中，需满足：RE是位于分配给PDSCH传输的公共资源块中的。</p>
+<p>参考点$k$：</p>
+<ul>
+<li>是CORESET 0中编号最小的资源块的子载波0，如果CORESET 0对应的PDCCH与和Type0-PDCCH共搜索空间相关联并且寻址到SI-RNTI</li>
+<li>否则，是公共资源款0的子载波0</li>
+</ul>
+<p>第一个DM-RS符号的参考点$l$和位置$l_0$取决于映射类型：</p>
+<ul>
+<li><p>PDSCH映射类型A：</p>
+</li>
+<li><p>$l$是slot的起始位置</p>
+</li>
+<li><p>如果高层参数dmrs-TypeA-Position = ‘pos3’，则$l_0 = 3$；否则$l_0 = 2$</p>
+</li>
+<li><p>PDSCH映射类型B：</p>
+</li>
+<li><p>$l$是调度的PDSCH资源起始位置</p>
+</li>
+<li><p>$l_0 = 0$</p>
+</li>
+</ul>
+<p>DM-RS符号的位置由$\bar l$和持续时间$l_d$给定，其中：</p>
+<ul>
+<li>对PDSCH映射类型A，$l_d$是时隙中第一个OFDM符号和调度的PDSCH资源的最后一个OFDM符号之间的时长</li>
+<li>对PDSCH映射类型B，$l_d$是调度的PDSCH的OFDM符号数目<br>&lt;!–<br>仅当dmrs-TypeA-Position等于’pos2’时，才支持大小写dmrs-AdditionalPosition等于’pos3’。对于PDSCH映射类型A，仅在dmrs-TypeA-Position等于’pos2’时，$l_d = 3$和$l_d = 4$个符号适用。</li>
+</ul>
+<p>对于PDSCH映射类型A单符号DM-RS,通常 $l_1 = 11$。除非满足以下所有条件时有$l_1 = 12$：</p>
+<ul>
+<li>配置高层参数lte-CRS-ToMatchAround，且任意PDSCH DM-RS符号与高层参数lte-CRS-ToMatchAround指示的包含LTE小区特定参考信号一致</li>
+<li>高层参数dmrs-AdditionalPosition等于’pos1’，$l_0=3$；</li>
+<li>UE已指示其能够[FG2-6b]<br>对于PDSCH映射类型B</li>
+<li>若PDSCH持续时间$l_d$为2,4,7个OFDM符号（正常循环前缀）或2, 4, 6个OFDM符号（扩展循环前缀），并且PDSCH分配与为与CORESET相关联的搜索空间集预留的资源冲突，应增加，使得第一个DM-RS符号在CORESET之后立即出现，并且</li>
+<li>若PDSCH时长$l_d$为2个符号，则UE不希望接收第二个符号之外的DM-RS符号。</li>
+<li>若PDSCH时长$l_d$为4个符号，则不希望UE在第三个符号之外接收DM-RS符号。</li>
+<li>若PDSCH持续时间$l_d$为正常循环前缀7个符号或扩展循环前缀6个符号，</li>
+<li>期望UE在第四符号之外不接收第一DM-RS，</li>
+<li>如果配置了1个附加单符号DM-RS，则UE期望在前载DM-RS符号分别位于第1个或第2个符号时，在第5个或第6个符号上传输附加DM-RS。，否则UE应期望不发送附加DM-RS。</li>
+<li>当PDSCH持续时间$l_d$为2个或4个OFDM符号时，仅支持单符号DM-RS。<br>表7.4.1.1.2-5给出了时域索引$l^{\prime}$和支持的天线端口p，其中</li>
+<li>DMRS-DownlinkConfig信元中的高层参数maxLength未配置时，使用单符号DM-RS。</li>
+<li>如果DMRS-DownlinkConfig信元中的高层参数maxLength等于‘len2’，则DM-RS的单符号或双符号由DCI确定。</li>
+</ul>
+<p>在没有CSI-RS配置的情况下，并且除非另外配置，否则UE可以假设PDSCH DM-RS和SS/PBCH块相对于多普勒频移、多普勒扩展、平均时延、时延扩展准共址，并且，适用时，空间接收参数。UE可以假设同一CDM组中的PDSCH DM-RS相对于多普勒频移、多普勒扩展、平均时延、时延扩展和空间Rx准共址。UE可以假设与PDSCH相关联的DMRS端口是具有QCL Type A、Type D （如果适用）和平均增益的QCL。 –&gt;</p>
+<p>DM-RS不应与SS/PBCH块有冲突。</p>
+<h4 id="CSI信号"><a href="#CSI信号" class="headerlink" title="CSI信号"></a>CSI信号</h4><h5 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h5><ul>
+<li>对于NZP-CSI-RS-Resource IE或CSI-RS-ResourceConfigMobility IE中的CSI-RS-Resource-Mobility字段配置的非零功率CSI-RS，序列应根据第7.4.1.5.2条生成，并根据第7.4.1.5.3条映射到RE</li>
+<li>对于由ZP-CSI-RS-Resource IE配置的零功率CSI-RS,UE应假设7.4.1.5.3中定义的RE不用于PDSCH传输。UE对除PDSCH以外的信道/信号，无论是否与ZP CSI-RS碰撞，都进行相同的测量/接收。</li>
+</ul>
+<h5 id="生成"><a href="#生成" class="headerlink" title="生成"></a>生成</h5><p>CSI参考信号由下式定义：<br>$$r(m) = \frac{1}{\sqrt{2}}(1 - 2\cdot c(2m)) + j \frac{1}{\sqrt{2}}(1 - 2\cdot c(2m + 1))$$</p>
+<p>以下列方式初始化：<br>伪随机序列生成器以下列方式初始化：<br>$$c_{init} = \left( 2^{10}(N_{symb}^{slot}n_{s,f}^{\mu} + l + 1)(2n_{ID} + 1) + n_{ID} \right) \text{mod} 2^{31}$$</p>
+<h5 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h5><p>当RE $a_{k,l}^{(p,\mu)}$位于UE配置的CSI-RS资源所占用的资源块内，CSI信号序列根据以下规则映射：<br>$$<br>\begin{aligned}<br>a_{k,l}^{(p,\mu)} &amp;= \beta_{CSIRS} \cdot w_f(k^{\prime}) \cdot w_t(l^{\prime}) \cdot r_{l, n_{s, f}}(m^{\prime} ) \<br>m^{\prime} &amp;= \lfloor n \alpha \rfloor + k^{\prime} + \lfloor\frac{\bar k \rho}{N_{sc}^{RB}} \rfloor \<br>k &amp;= nN_{sc}^{RB} + \bar k + k^{\prime} \<br>l &amp;= \bar l + l^{\prime} \<br>\alpha &amp;=<br>\begin{cases}<br>\rho &amp; X = 1<br>2\rho &amp; X &gt; 1<br>\end{cases}\<br>n &amp;= 0, 1, \cdots<br>\end{aligned}<br>$$</p>
+<p>参考点$k=0$是CRB0的子载波0.</p>
+<p>$\rho$的值由CSI-RS-ResourceMapping IE或CSI-RS-CellMobility IE中的高层参数’密度’给出，端口数X由高层参数’nrofPorts’给出。</p>
+<p>UE不希望收到的CSI-RS和DM-RS在相同的RE上。</p>
+<p>对于一个NZP CSI-RS，UE假定$\beta_{CSIRS}&gt;0$，其中$\beta_{CSIRS}$是由高层参数指定的满足功率偏移要求的值。</p>
+<p>RE的时域位置$l_0 \in {2,3,\cdots,12}$和$l_1 \in {2,3,\cdots,12}$定义为距离slot起始处的位置，由高层参数<code>firstOFDMSymbolInTimeDomain</code>和<code>firstOFDMSymbolInTimeDomain2</code>指定。</p>
+<p>频域位置由位于<code>CSI-RS-ResourceMappin</code>中的高层参数<code>frequencyDomainAllocation</code>提供的bitmap指定</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/01/05/feedbacks/" rel="prev" title="论文笔记：Backstepping with bounded feedbacks">
+      <i class="fa fa-chevron-left"></i> 论文笔记：Backstepping with bounded feedbacks
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/09/13/LeetCode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" rel="next" title="LeetCode刷题记录">
+      LeetCode刷题记录 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#早会学习小结"><span class="nav-number">1.</span> <span class="nav-text">早会学习小结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#物理广播信道"><span class="nav-number">1.0.1.</span> <span class="nav-text">物理广播信道</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#加扰"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">加扰</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调制"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">调制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#映射到物理资源"><span class="nav-number">1.0.1.3.</span> <span class="nav-text">映射到物理资源</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#物理信号"><span class="nav-number">1.1.</span> <span class="nav-text">物理信号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考信号"><span class="nav-number">1.1.1.</span> <span class="nav-text">参考信号</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PDSCH的解调参考信号"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">PDSCH的解调参考信号</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#序列生成"><span class="nav-number">1.1.1.1.1.</span> <span class="nav-text">序列生成</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#映射到物理资源-1"><span class="nav-number">1.1.1.1.2.</span> <span class="nav-text">映射到物理资源</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSI信号"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">CSI信号</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#概述"><span class="nav-number">1.1.1.2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#生成"><span class="nav-number">1.1.1.2.2.</span> <span class="nav-text">生成</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#映射"><span class="nav-number">1.1.1.2.3.</span> <span class="nav-text">映射</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Mistery"
+      src="http://www.acgrenwu.com/uploads/allimg/170821/1-1FR11FRK10.jpg">
+  <p class="site-author-name" itemprop="name">Mistery</p>
+  <div class="site-description" itemprop="description">Nice to meet you!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/LegendRui" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;LegendRui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:mistery.zhang@gmail.com" title="E-Mail → mailto:mistery.zhang@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mistery</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">28k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">25 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.1.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '5da5a2e7cbc408a1f238',
+      clientSecret: '3025506b07be9ff5080724dd8b9d8829a051676d',
+      repo: 'LegendRui.github.io',
+      owner: 'LegendRui',
+      admin: ['LegendRui'],
+      id: '3278981aa2f837b51fd19e5aae55e58b',
+        language: 'zh-CN',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+
+</body>
+</html>
